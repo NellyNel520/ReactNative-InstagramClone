@@ -3,19 +3,22 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <View>
+    <View style={styles.container}>
       {/* Logo */}
       <TouchableOpacity>
         <Image style={styles.logo} source={require('../../assets/ig-logo.png')}/>
       </TouchableOpacity>
 
       {/* icons on right */}
-      <View>
+      <View style={styles.iconsContainer}>
         <TouchableOpacity>
           <Image style={styles.icon} source={{uri: 'https://img.icons8.com/material-outlined/24/ffffff/like--v1.png'}}/>
         </TouchableOpacity>
 
         <TouchableOpacity>
+        <View style={styles.unreadBadge}>
+          <Text style={styles.undreadBadgeText}>15</Text>
+        </View>
           <Image 
             style={styles.icon}
             source={{uri: 'https://img.icons8.com/external-tanah-basah-basic-outline-tanah-basah/24/ffffff/external-messenger-social-media-tanah-basah-basic-outline-tanah-basah.png'}}
@@ -41,6 +44,31 @@ const styles = StyleSheet.create({
 		height: 30,
 		marginLeft: 14,
 		resizeMode: 'contain',
+	},
+  container: {
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		flexDirection: 'row',
+		marginHorizontal: 20,
+	},
+	iconsContainer: {
+		flexDirection: 'row',
+	},
+  unreadBadge: {
+		backgroundColor: '#FF3250',
+		position: 'absolute',
+		left: 20,
+		bottom: 18,
+		width: 25,
+		height: 18,
+		borderRadius: 25,
+		alignItems: 'center',
+		justifyContent: 'center',
+		zIndex: 100,
+	},
+	undreadBadgeText: {
+		color: 'white',
+		fontWeight: '600',
 	},
 })
 
