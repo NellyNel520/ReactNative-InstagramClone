@@ -51,8 +51,6 @@ const AddPostForm = ({navigation}) => {
 
 	const uploadPostToFirebase = (imageUrl, caption) => {
 		const unsubscribe = db
-			.collection('users')
-			.doc(firebase.auth().currentUser.email)
 			.collection('posts')
 			.add({
 				imageUrl: imageUrl,
@@ -63,7 +61,6 @@ const AddPostForm = ({navigation}) => {
 				caption: caption,
 				createdAt: new Date(),
 				likes_by_users: [],
-				comments: [],
 			})
 			.then(() => navigation.goBack())
 
