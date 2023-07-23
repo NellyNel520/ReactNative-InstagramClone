@@ -1,5 +1,6 @@
-import { View, Text } from 'react-native'
+import { View, Text, Image, StyleSheet } from 'react-native'
 import React from 'react'
+import { Divider } from 'react-native-elements'
 
 const postFooterIcons = [
 	{
@@ -23,12 +24,33 @@ const postFooterIcons = [
 ]
 
 
-const Post = () => {
+const Post = ({post}) => {
   return (
     <View>
-      <Text>Post</Text>
+      <Divider width={1} orientation='vertical'/>
+      <PostHeader post={post} />
     </View>
   )
 }
 
+const PostHeader = ({post}) => (
+  <View>
+
+    <View>
+      <Image source={{ uri: post.profilePic}} style={styles.story}/>
+    </View>
+  </View>
+)
+
+
+const styles = StyleSheet.create({
+  story: {
+    width: 35,
+		height: 35,
+		borderRadius: 50,
+		marginLeft: 6,
+		borderWidth: 1.7,
+		borderColor: '#ff8501',
+  }
+})
 export default Post
