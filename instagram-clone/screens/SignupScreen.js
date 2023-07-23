@@ -1,5 +1,6 @@
 import { StyleSheet, View, Image, Text } from 'react-native'
 import React from 'react'
+import SignupForm from '../components/signup/SignupForm'
 
 const INSTAGRAM_LOGO = 'https://img.icons8.com/fluency/96/instagram-new.png'
 
@@ -11,6 +12,7 @@ const SignupScreen = () => {
         <Image source={{uri: INSTAGRAM_LOGO, height: 100, width: 100}}/>
       </View>
       {/* signup form */}
+      <SignupForm />
     </View>
   )
 }
