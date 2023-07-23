@@ -35,31 +35,59 @@ export const bottomTabIcons = [
 	},
 ]
 
-const BottomTabs = ({icons}) => {
+const BottomTabs = ({ icons }) => {
+	const [activeTab, setActiveTab] = useState('Home')
 
-  const Icon = ({ icon }) => (
-    <TouchableOpacity>
-      <Image source={{uri: icon.inactive}} style={styles.icon}/>
-    </TouchableOpacity>
-  )
-  return (
-    <View>
-      <Divider width={1} orientation='vertical'/>
-      <View style={styles.container}>
-        {icons.map((icon, index) => (
-          <Icon key={index} icon={icon} />
-        ))}
-      </View>
-    </View>
-  )
+	const Icon = ({ icon }) => (
+		<TouchableOpacity onPress={() => setActiveTab(icon.name)}>
+			<Image
+				source={{ uri: icon.inactive }}
+				style={[
+					styles.icon,
+					icon.name === 'Profile' ? styles.profilePic() : null,
+					activeTab === 'Profile' && icon.name === activeTab
+						? styles.profilePic(activeTab)
+						: null,
+				]}
+			/>
+		</TouchableOpacity>
+	)
+	return (
+		<View style={styles.wrapper}>
+			<Divider width={1} orientation="vertical" />
+			<View style={styles.container}>
+				{icons.map((icon, index) => (
+					<Icon key={index} icon={icon} />
+				))}
+			</View>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
-  icon: {
+	icon: {
 		width: 30,
 		height: 30,
 		// marginHorizontal: 15,
 	},
+	wrapper: {
+		position: 'absolute',
+		width: '100%',
+		bottom: '3%',
+		zIndex: 999,
+		backgroundColor: '#000000',
+	},
+	container: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		height: 50,
+		paddingTop: 10,
+	},
+	profilePic: (activeTab = '') => ({
+		borderRadius: 50,
+		borderColor: 'white',
+		borderWidth: activeTab === 'Profile' ? 3 : 0,
+	}),
 })
 
 export default BottomTabs
