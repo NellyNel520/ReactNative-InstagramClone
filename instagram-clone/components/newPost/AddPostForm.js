@@ -5,6 +5,7 @@ import { Divider } from 'react-native-elements'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import validUrl from 'valid-url'
+import { firebase, db } from '../../firebase'
 
 const PLACEHOLDER_IMG =
 	'https://t3.ftcdn.net/jpg/02/68/55/60/360_F_268556012_c1WBaKFN5rjRxR2eyV33znK4qnYeKZjm.jpg'
@@ -16,14 +17,67 @@ const uploadPostSchema = Yup.object().shape({
 
 const AddPostForm = ({navigation}) => {
 	const [thumbnailUrl, setThumbnailUrl] = useState(PLACEHOLDER_IMG)
+	const [username, setUsername] = useState('')
+	const [profilePic, setProfilePic] = useState('')
+
+	const getUsername = () => {
+		// may need to change doc ref from uid to user email to be consistent 
+		const user = firebase.auth().currentUser.email
+		const docRef = db.collection('users').doc(user)
+		const unsubscribe = docRef
+			.get()
+			.then((doc) => {
+				if (doc.exists) {
+					// console.log('Document data:', doc.data())
+					setUsername(doc.data().username)
+					setProfilePic(doc.data().profile_picture)
+				} else {
+					console.log('No such document!')
+				}
+			})
+			.catch((error) => {
+				console.log('Error getting document:', error)
+			})
+			return unsubscribe
+
+	}
+
+	useEffect(() => {
+		getUsername()
+		console.log(username)
+		console.log(profilePic)
+	}, [])
+
+
+	const uploadPostToFirebase = (imageUrl, caption) => {
+		const unsubscribe = db
+			.collection('users')
+			.doc(firebase.auth().currentUser.email)
+			.collection('posts')
+			.add({
+				imageUrl: imageUrl,
+				user: username,
+				profile_picture: profilePic,
+				owner_uid: firebase.auth().currentUser.uid,
+				owner_email: firebase.auth().currentUser.email,
+				caption: caption,
+				createdAt: new Date(),
+				likes_by_users: [],
+				comments: [],
+			})
+			.then(() => navigation.goBack())
+
+		return unsubscribe
+	}
 
 	return (
 		<Formik
       initialValues={{ caption: '', imageUrl: '' }}
 			onSubmit={(values) => {
-				console.log(values)
-				console.log('Your Post was submitted successfully 🎉')
-				navigation.goBack()
+				// console.log(values)
+				// console.log('Your Post was submitted successfully 🎉')
+				// navigation.goBack()
+				uploadPostToFirebase(values.imageUrl, values.caption)
 				
 			}}
 			validationSchema={uploadPostSchema}

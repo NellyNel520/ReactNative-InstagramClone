@@ -22,6 +22,15 @@ const signupFormSchema = Yup.object().shape({
 		.min(6, 'Your password has to have at least 8 characters '),
 })
 
+
+// gives every user a random profile image on sign up
+const getRandomProfilePicture = async () => {
+	const response = await fetch('https://randomuser.me/api')
+	const data = await response.json()
+	return data.results[0].picture.large
+}
+
+
 const onSignup = async (email, password, username) => {
 	try {
 		const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
