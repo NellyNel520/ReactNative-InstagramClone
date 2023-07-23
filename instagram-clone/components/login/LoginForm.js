@@ -45,6 +45,7 @@ const LoginForm = ({navigation}) => {
 			)
 		}
 
+	}
 
 	return (
 		<View style={styles.wrapper}>
