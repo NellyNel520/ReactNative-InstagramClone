@@ -9,7 +9,7 @@ const AddNewPost = ({navigation}) => {
       {/* header / page navigation */}
       <Header navigation={navigation}/>
       {/* post form */}
-      <AddPostForm />
+      <AddPostForm navigation={navigation}/>
     </View>
   )
 }

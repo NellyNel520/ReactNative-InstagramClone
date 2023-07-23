@@ -14,7 +14,7 @@ const uploadPostSchema = Yup.object().shape({
 	caption: Yup.string().max(2200, 'Caption has reached the character limit'),
 })
 
-const AddPostForm = () => {
+const AddPostForm = ({navigation}) => {
 	const [thumbnailUrl, setThumbnailUrl] = useState(PLACEHOLDER_IMG)
 
 	return (
@@ -23,6 +23,7 @@ const AddPostForm = () => {
 			onSubmit={(values) => {
 				console.log(values)
 				console.log('Your Post was submitted successfully 🎉')
+				navigation.goBack()
 				
 			}}
 			validationSchema={uploadPostSchema}
@@ -76,7 +77,7 @@ const AddPostForm = () => {
 						</Text>
 					)}
 
-          <Button title='Share' disabled={!isValid} />
+          <Button onPress={handleSubmit} title='Share' disabled={!isValid} />
 				</>
 			)}
 		</Formik>
