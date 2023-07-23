@@ -83,7 +83,7 @@ const PostFooter = ({ post }) => (
 			</TouchableOpacity>
 		</View>
 
-		<View>
+		<View style={{ flex: 1, alignItems: 'flex-end' }}>
 			<TouchableOpacity>
 				<Image style={styles.footerIcon} source={{uri: 'https://img.icons8.com/fluency-systems-regular/48/ffffff/bookmark-ribbon--v1.png'}}/>
 			</TouchableOpacity>
