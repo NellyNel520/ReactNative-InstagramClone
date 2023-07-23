@@ -102,8 +102,16 @@ const LoginForm = () => {
               onPress={handleSubmit}
               disabled={!isValid}
             >
-              <Text>Log In</Text>
+              <Text style={styles.buttonText}>Log In</Text>
             </Pressable>
+
+            <View style={styles.signupContainer}>
+              <Text>Don't have an account?</Text>
+              {/* add navigation to sign up screen once created */}
+              <TouchableOpacity>
+                <Text style={{color: '#6BB0F5'}}>  Sign up</Text>
+              </TouchableOpacity>
+            </View>
 					</>
 				)}
 			</Formik>
