@@ -4,6 +4,7 @@ import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import { POSTS } from '../data/posts'
 import Post from '../components/home/Post'
+import BottomTabs from '../components/home/BottomTabs'
 
 const HomeScreen = () => {
   return (
@@ -16,6 +17,8 @@ const HomeScreen = () => {
           <Post post={post} key={index}/>
         ))}
       </ScrollView>
+
+      <BottomTabs />
     </SafeAreaView>
   )
 }
