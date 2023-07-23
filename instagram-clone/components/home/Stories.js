@@ -9,7 +9,12 @@ const Stories = () => {
         <View key={index}>
           <Image source={{uri: story.image}} style={styles.story}/>
 
-          <Text></Text>
+          <Text style={{color: 'white'}}>
+            {story.user.length > 11
+              ? story.user.slice(0, 6).toLowerCase() + '...'
+              : story.user.toLowerCase()
+            }
+          </Text>
         </View>
       ))}
     </View>
