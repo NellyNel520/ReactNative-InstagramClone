@@ -114,7 +114,8 @@ const PostFooter = ({ post }) => (
 
 const Likes = ({post}) => (
   <View style={{ flexDirection: 'row', marginTop: 4}}>
-    <Text style={{color: 'white', fontWeight: 600}}>{post.likes.toLocaleString('en')} likes</Text>
+    {/* <Text style={{color: 'white', fontWeight: 600}}>{post.likes.toLocaleString('en')} likes</Text> */}
+		<Text style={{color: 'white', fontWeight: 600}}>{post.likes} likes</Text>
   </View>
 )
 
