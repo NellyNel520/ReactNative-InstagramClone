@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import { Divider } from 'react-native-elements'
@@ -35,12 +35,31 @@ export const bottomTabIcons = [
 	},
 ]
 
-const BottomTabs = () => {
+const BottomTabs = ({icons}) => {
+
+  const Icon = ({ icon }) => (
+    <TouchableOpacity>
+      <Image source={{uri: icon.inactive}} style={styles.icon}/>
+    </TouchableOpacity>
+  )
   return (
     <View>
-      <Text style={{color: 'white'}}>BottomTabs</Text>
+      <Divider width={1} orientation='vertical'/>
+      <View style={styles.container}>
+        {icons.map((icon, index) => (
+          <Icon key={index} icon={icon} />
+        ))}
+      </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  icon: {
+		width: 30,
+		height: 30,
+		// marginHorizontal: 15,
+	},
+})
 
 export default BottomTabs
