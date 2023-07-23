@@ -4,30 +4,30 @@ import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import { POSTS } from '../data/posts'
 import Post from '../components/home/Post'
-import BottomTabs from '../components/home/BottomTabs'
+import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs'
 
 const HomeScreen = () => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <Stories />
+	return (
+		<SafeAreaView style={styles.container}>
+			<Header />
+			<Stories />
 
-      <ScrollView>
-        {POSTS.map((post, index) => (
-          <Post post={post} key={index}/>
-        ))}
-      </ScrollView>
+			<ScrollView>
+				{POSTS.map((post, index) => (
+					<Post post={post} key={index} />
+				))}
+			</ScrollView>
 
-      <BottomTabs />
-    </SafeAreaView>
-  )
+			<BottomTabs bottomTabIcons={bottomTabIcons}/>
+		</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: 'black',
-    flex: 1,
-  }
+	container: {
+		backgroundColor: 'black',
+		flex: 1,
+	},
 })
 
 export default HomeScreen
