@@ -13,7 +13,7 @@ import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Validator from 'email-validator'
 
-const LoginForm = () => {
+const LoginForm = ({navigation}) => {
 	// Form Schema
 
 	const loginFormSchema = Yup.object().shape({
@@ -108,7 +108,7 @@ const LoginForm = () => {
             <View style={styles.signupContainer}>
               <Text style={{color: 'white'}}>Don't have an account?</Text>
               {/* add navigation to sign up screen once created */}
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
                 <Text style={{color: '#6BB0F5'}}>  Sign up</Text>
               </TouchableOpacity>
             </View>

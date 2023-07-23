@@ -20,7 +20,7 @@ const signupFormSchema = Yup.object().shape({
 		.min(6, 'Your password has to have at least 8 characters '),
 })
 
-const SignupForm = () => {
+const SignupForm = ({navigation}) => {
 	return (
 		<View style={styles.wrapper}>
 			<Formik
@@ -122,7 +122,7 @@ const SignupForm = () => {
 
             <View style={styles.signupContainer}>
             <Text style={{color: 'white'}}>Already have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.push('LoginScreen')}>
               <Text style={{ color: '#6BB0F5' }}>  Login</Text>
             </TouchableOpacity>
 

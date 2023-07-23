@@ -5,14 +5,14 @@ import SignupForm from '../components/signup/SignupForm'
 const INSTAGRAM_LOGO = 'https://img.icons8.com/fluency/96/instagram-new.png'
 
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
         <Image source={{uri: INSTAGRAM_LOGO, height: 100, width: 100}}/>
       </View>
       {/* signup form */}
-      <SignupForm />
+      <SignupForm navigation={navigation}/>
     </View>
   )
 }
