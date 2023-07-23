@@ -11,6 +11,8 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Validator from 'email-validator'
+import { firebase, db } from '../../firebase'
+
 
 const signupFormSchema = Yup.object().shape({
 	email: Yup.string().email().required('An email'),
@@ -20,14 +22,32 @@ const signupFormSchema = Yup.object().shape({
 		.min(6, 'Your password has to have at least 8 characters '),
 })
 
+const onSignup = async (email, password, username) => {
+	try {
+		const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
+		console.log('🔥 Firebase Signup Successful ✅', email, password)
+
+		db.collection('users').doc(authUser.user.email).set({
+			owner_uid: authUser.user.uid,
+			username: username,
+			email: authUser.user.email,
+			profile_picture: await getRandomProfilePicture(),
+		})
+	} catch (error) {
+		Alert.alert('Opps ...', error.message)
+	}
+}
+
+
+
 const SignupForm = ({navigation}) => {
 	return (
 		<View style={styles.wrapper}>
 			<Formik
 				initialValues={{ email: '', password: '', username: '' }}
 				onSubmit={(values) => {
-					// onSignup(values.email, values.password, values.username)
-          console.log(values.email, values.password, values.username)
+					onSignup(values.email, values.password, values.username)
+          // console.log(values.email, values.password, values.username)
 				}}
 				validationSchema={signupFormSchema}
 				validateOnMount={true}
