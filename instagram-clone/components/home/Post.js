@@ -40,6 +40,7 @@ const Post = ({ post }) => {
 				<PostFooter post={post} />
         <Likes post={post}/>
         <Caption post={post} />
+        <CommentSection post={post} />
 			</View>
 		</View>
 	)
@@ -119,9 +120,21 @@ const Likes = ({post}) => (
 const Caption = ({post}) => (
   <View style={{marginTop: 5}}>
     <Text style={{color: 'white'}}>
-      <Text style={{ fontWeight: '800'}}>{post.user}</Text>
+      <Text style={{ fontWeight: '800'}}>{post.user}  </Text>
       <Text>{post.caption}</Text>
     </Text>
+  </View>
+)
+
+const CommentSection = ({post}) => (
+  <View style={{marginTop: 5}}>
+    {!!post.comments.length && (
+      <Text style={{ color: 'gray', fontWeight: 600 }}>
+        View {post.comments.length > 1 ? 'all ' : ''}
+        {post.comments.length}{' '}
+        {post.comments.length > 1 ? 'comments' : 'comment'}
+      </Text>
+    )}
   </View>
 )
 
