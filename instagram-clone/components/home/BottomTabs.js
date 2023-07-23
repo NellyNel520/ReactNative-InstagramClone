@@ -9,6 +9,7 @@ export const bottomTabIcons = [
 		active: 'https://img.icons8.com/fluency-systems-filled/48/ffffff/home.png',
 		inactive:
 			'https://img.icons8.com/fluency-systems-regular/48/ffffff/home.png',
+			nav: 'HomeScreen'
 	},
 	{
 		name: 'Search',
