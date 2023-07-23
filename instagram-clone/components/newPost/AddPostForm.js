@@ -56,7 +56,7 @@ const AddPostForm = ({navigation}) => {
 								multiline={true}
                 onChangeText={handleChange('caption')}
                 onBlur={handleBlur('caption')}
-								// value={values.caption}
+								value={values.caption}
 							/>
 						</View>
 					</View>
@@ -69,7 +69,7 @@ const AddPostForm = ({navigation}) => {
 						placeholderTextColor="gray"
 						onChangeText={handleChange('imageUrl')}
 						onBlur={handleBlur('imageUrl')}
-						// value={values.imageUrl}
+						value={values.imageUrl}
 					/>
 					{errors.imageUrl && (
 						<Text style={{ fontSize: 10, color: 'red' }}>
