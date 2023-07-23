@@ -41,6 +41,7 @@ const Post = ({ post }) => {
         <Likes post={post}/>
         <Caption post={post} />
         <CommentSection post={post} />
+        <Comments post={post}/>
 			</View>
 		</View>
 	)
@@ -135,6 +136,19 @@ const CommentSection = ({post}) => (
         {post.comments.length > 1 ? 'comments' : 'comment'}
       </Text>
     )}
+  </View>
+)
+
+const Comments = ({post}) => (
+  <View>
+    {post.comments.slice(0, 2).map((comment, index) => (
+      <View key={index} style={{ flexDirection: 'row', marginTop: 3}}>
+        <Text style={{ color: 'white'}}>
+          <Text style={{ fontWeight: 700}}>{comment.user}</Text>{' '}
+          {comment.comment}
+        </Text>
+      </View>
+    ))}
   </View>
 )
 
