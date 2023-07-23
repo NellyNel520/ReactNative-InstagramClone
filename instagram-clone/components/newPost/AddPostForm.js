@@ -43,13 +43,24 @@ const AddPostForm = () => {
 								placeholder="Write a Caption"
 								placeholderTextColor="gray"
 								multiline={true}
-								value={values.caption}
+								// value={values.caption}
 							/>
 						</View>
 					</View>
 
-					<Divider width={0.2} orientation='vertical' />
-					<TextInput />
+					<Divider width={0.2} orientation="vertical" />
+					<TextInput
+						onChange={(e) => setThumbnailUrl(e.nativeEvent.text)}
+						style={{ color: 'white', fontSize: 18 }}
+						placeholder="Enter Image Url"
+						placeholderTextColor="gray"
+						// value={values.imageUrl}
+					/>
+					{errors.imageUrl && (
+						<Text style={{ fontSize: 10, color: 'red' }}>
+							{errors.imageUrl}
+						</Text>
+					)}
 				</>
 			)}
 		</Formik>
