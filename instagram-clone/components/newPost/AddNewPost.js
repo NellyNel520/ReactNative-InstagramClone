@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
+import AddPostForm from './AddPostForm'
 
 const AddNewPost = () => {
   return (
@@ -8,6 +9,7 @@ const AddNewPost = () => {
       {/* header / page navigation */}
       <Header />
       {/* post form */}
+      <AddPostForm />
     </View>
   )
 }
