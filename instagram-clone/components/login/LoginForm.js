@@ -93,7 +93,7 @@ const LoginForm = () => {
 						</View>
 
             <View style={{alignItems: 'flex-end', marginBottom: 30}}>
-              <Text style={{ color: '#6BB0F5'}}>Forgot Password</Text>
+              <Text style={{ color: '#6BB0F5'}}>Forgot Password?</Text>
             </View>
 
             <Pressable 
@@ -106,7 +106,7 @@ const LoginForm = () => {
             </Pressable>
 
             <View style={styles.signupContainer}>
-              <Text>Don't have an account?</Text>
+              <Text style={{color: 'white'}}>Don't have an account?</Text>
               {/* add navigation to sign up screen once created */}
               <TouchableOpacity>
                 <Text style={{color: '#6BB0F5'}}>  Sign up</Text>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
 		padding: 12,
 		backgroundColor: '#FAFAFA',
 		marginBottom: 10,
-		borderWidth: 1,
+		borderWidth: 2.5,
 	},
 	wrapper: {
 		marginTop: 80,
