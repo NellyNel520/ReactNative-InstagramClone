@@ -6,8 +6,9 @@ import {
 	Touchable,
 	TouchableOpacity,
 } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Divider } from 'react-native-elements'
+import { firebase, db } from '../../firebase'
 
 const postFooterIcons = [
 	{
@@ -31,17 +32,25 @@ const postFooterIcons = [
 ]
 
 const Post = ({ post }) => {
+const [comments, setComments ] = useState([])
+
+	useEffect(() => {
+		db.collection('posts').doc(post.id).collection('comments').onSnapshot((snapshot) => {
+			setComments(snapshot.docs.map((comment) => ({ id: comment.id, ...comment.data() })))
+		})
+	}, [])
+
 	return (
 		<View style={{ marginBottom: 30 }}>
 			<Divider width={1} orientation="vertical" />
 			<PostHeader post={post} />
 			<PostImage post={post} />
-			<View style={{ marginHorizontal: 2, marginTop: 10}}>
+			<View style={{ marginHorizontal: 2, marginTop: 10 }}>
 				<PostFooter post={post} />
-        <Likes post={post}/>
-        <Caption post={post} />
-        <CommentSection post={post} />
-        <Comments post={post}/>
+				<Likes post={post} />
+				<Caption post={post} />
+				<CommentSection comments={comments} />
+        <Comments comments={comments}/>
 			</View>
 		</View>
 	)
@@ -112,37 +121,37 @@ const PostFooter = ({ post }) => (
 	</View>
 )
 
-const Likes = ({post}) => (
-  <View style={{ flexDirection: 'row', marginTop: 4}}>
-    {/* <Text style={{color: 'white', fontWeight: 600}}>{post.likes.toLocaleString('en')} likes</Text> */}
-		<Text style={{color: 'white', fontWeight: 600}}>{post.likes} likes</Text>
-  </View>
+const Likes = ({ post }) => (
+	<View style={{ flexDirection: 'row', marginTop: 4 }}>
+		{/* <Text style={{color: 'white', fontWeight: 600}}>{post.likes.toLocaleString('en')} likes</Text> */}
+		<Text style={{ color: 'white', fontWeight: 600 }}>{post.likes} likes</Text>
+	</View>
 )
 
-const Caption = ({post}) => (
-  <View style={{marginTop: 5}}>
-    <Text style={{color: 'white'}}>
-      <Text style={{ fontWeight: '800'}}>{post.user}  </Text>
-      <Text>{post.caption}</Text>
-    </Text>
-  </View>
+const Caption = ({ post }) => (
+	<View style={{ marginTop: 5 }}>
+		<Text style={{ color: 'white' }}>
+			<Text style={{ fontWeight: '800' }}>{post.user} </Text>
+			<Text>{post.caption}</Text>
+		</Text>
+	</View>
 )
 
-const CommentSection = ({post}) => (
+const CommentSection = ({comments}) => (
   <View style={{marginTop: 5}}>
-    {!!post.comments.length && (
+    {!!comments.length && (
       <Text style={{ color: 'gray', fontWeight: 600 }}>
-        View {post.comments.length > 1 ? 'all ' : ''}
-        {post.comments.length}{' '}
-        {post.comments.length > 1 ? 'comments' : 'comment'}
+        View {comments.length > 1 ? 'all ' : ''}
+        {comments.length}{' '}
+        {comments.length > 1 ? 'comments' : 'comment'}
       </Text>
     )}
   </View>
 )
 
-const Comments = ({post}) => (
+const Comments = ({comments}) => (
   <View>
-    {post.comments.slice(0, 2).map((comment, index) => (
+    {comments.slice(0, 2).map((comment, index) => (
       <View key={index} style={{ flexDirection: 'row', marginTop: 3}}>
         <Text style={{ color: 'white'}}>
           <Text style={{ fontWeight: 700}}>{comment.user}</Text>{' '}

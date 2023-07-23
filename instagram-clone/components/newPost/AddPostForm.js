@@ -40,7 +40,7 @@ const AddPostForm = ({navigation}) => {
 			})
 			return unsubscribe
 
-	}
+	} 
 
 	useEffect(() => {
 		getUsername()

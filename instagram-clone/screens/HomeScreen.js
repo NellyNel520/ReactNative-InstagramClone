@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
 			<Stories />
 
 			<ScrollView>
-				{POSTS.map((post, index) => (
+				{posts.map((post, index) => (
 					<Post post={post} key={index} />
 				))}
 			</ScrollView>
