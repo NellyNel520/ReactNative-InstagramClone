@@ -26,7 +26,7 @@ const LoginForm = () => {
 	})
 
 	return (
-		<View>
+		<View style={styles.wrapper}>
 			<Formik
 				initialValues={{ email: '', password: '' }}
 				onSubmit={(values) => {
@@ -86,11 +86,24 @@ const LoginForm = () => {
 								autoCorrect={false}
 								secureTextEntry={true}
 								textContentType="password"
-								onChangeText={handleChange('email')}
-								onBlur={handleBlur('email')}
-								value={values.email}
+								onChangeText={handleChange('password')}
+								onBlur={handleBlur('password')}
+								value={values.password}
 							/>
 						</View>
+
+            <View style={{alignItems: 'flex-end', marginBottom: 30}}>
+              <Text style={{ color: '#6BB0F5'}}>Forgot Password</Text>
+            </View>
+
+            <Pressable 
+              titleSize={20}
+              style={styles.button(isValid)}
+              onPress={handleSubmit}
+              disabled={!isValid}
+            >
+              <Text>Log In</Text>
+            </Pressable>
 					</>
 				)}
 			</Formik>
@@ -108,6 +121,24 @@ const styles = StyleSheet.create({
 	},
 	wrapper: {
 		marginTop: 80,
+	},
+  signupContainer: {
+		flexDirection: 'row',
+		width: '100%',
+		justifyContent: 'center',
+		marginTop: 50,
+	},
+  button: (isValid) => ({
+		backgroundColor: isValid ? '#0096f6' : '#9ACAF7',
+		alignItems: 'center',
+		justifyContent: 'center',
+		minHeight: 42,
+		borderRadius: 4,
+	}),
+	buttonText: {
+		fontWeight: 600,
+		color: '#fff',
+		fontSize: 20,
 	},
 })
 
