@@ -36,7 +36,10 @@ const Post = ({ post }) => {
 			<Divider width={1} orientation="vertical" />
 			<PostHeader post={post} />
 			<PostImage post={post} />
-      <PostFooter post={post} />
+			<View style={{ marginHorizontal: 2, marginTop: 10}}>
+				<PostFooter post={post} />
+        <Likes post={post}/>
+			</View>
 		</View>
 	)
 }
@@ -70,25 +73,46 @@ const PostImage = ({ post }) => (
 
 const PostFooter = ({ post }) => (
 	<View style={{ flexDirection: 'row' }}>
-
 		<View style={styles.leftFooterIconContainer}>
 			<TouchableOpacity>
-				<Image style={styles.footerIcon} source={{uri: postFooterIcons[0].imageUrl}}/>
+				<Image
+					style={styles.footerIcon}
+					source={{ uri: postFooterIcons[0].imageUrl }}
+				/>
 			</TouchableOpacity>
 			<TouchableOpacity>
-				<Image style={styles.footerIcon} source={{uri: 'https://img.icons8.com/ios/50/ffffff/speech-bubble--v1.png'}}/>
+				<Image
+					style={styles.footerIcon}
+					source={{
+						uri: 'https://img.icons8.com/ios/50/ffffff/speech-bubble--v1.png',
+					}}
+				/>
 			</TouchableOpacity>
 			<TouchableOpacity>
-				<Image style={styles.footerIcon} source={{uri: 'https://img.icons8.com/ios/50/ffffff/sent--v1.png'}}/>
+				<Image
+					style={styles.footerIcon}
+					source={{ uri: 'https://img.icons8.com/ios/50/ffffff/sent--v1.png' }}
+				/>
 			</TouchableOpacity>
 		</View>
 
 		<View style={{ flex: 1, alignItems: 'flex-end' }}>
 			<TouchableOpacity>
-				<Image style={styles.footerIcon} source={{uri: 'https://img.icons8.com/fluency-systems-regular/48/ffffff/bookmark-ribbon--v1.png'}}/>
+				<Image
+					style={styles.footerIcon}
+					source={{
+						uri: 'https://img.icons8.com/fluency-systems-regular/48/ffffff/bookmark-ribbon--v1.png',
+					}}
+				/>
 			</TouchableOpacity>
 		</View>
 	</View>
+)
+
+const Likes = ({post}) => (
+  <View>
+    <Text style={{color: 'white'}}>{post.likes.toLocaleString('en')} likes</Text>
+  </View>
 )
 
 const styles = StyleSheet.create({
@@ -100,16 +124,15 @@ const styles = StyleSheet.create({
 		borderWidth: 1.7,
 		borderColor: '#ff8501',
 	},
-  footerIcon: {
-    width: 33,
-    height: 33,
-    marginRight: 6,
-  },
-  leftFooterIconContainer: {
+	footerIcon: {
+		width: 33,
+		height: 33,
+		marginRight: 6,
+	},
+	leftFooterIconContainer: {
 		flexDirection: 'row',
 		width: '32%',
 		justifyContent: 'space-between',
 	},
-
 })
 export default Post
