@@ -12,6 +12,7 @@ import React from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import Validator from 'email-validator'
+import {firebase, db} from '../../firebase'
 
 const LoginForm = ({navigation}) => {
 	// Form Schema
@@ -24,6 +25,26 @@ const LoginForm = ({navigation}) => {
 			.required()
 			.min(6, 'Your password has to have at least 6 characters '),
 	})
+
+	const onLogin = async (email, password) => {
+		try {
+			await firebase.auth().signInWithEmailAndPassword(email, password)
+			console.log('🔥 Firebase Login Successful ✅', email, password)
+		} catch (error) {
+			Alert.alert(
+				'Opps ...',
+				error.message + '\n\n...how do you want to proceed ? ',
+				[
+					{
+						text: 'OK',
+						onPress: () => console.log('OK'),
+						style: 'cancel',
+					},
+					{text: 'Sign Up', onPress: () => navigation.push('SignupScreen')}
+				]
+			)
+		}
+
 
 	return (
 		<View style={styles.wrapper}>
