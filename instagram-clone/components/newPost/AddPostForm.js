@@ -18,7 +18,17 @@ const AddPostForm = () => {
 	const [thumbnailUrl, setThumbnailUrl] = useState(PLACEHOLDER_IMG)
 
 	return (
-		<Formik>
+		<Formik
+      initialValues={{ caption: '', imageUrl: '' }}
+			onSubmit={(values) => {
+				console.log(values)
+				console.log('Your Post was submitted successfully 🎉')
+				
+			}}
+			validationSchema={uploadPostSchema}
+			validateOnMount={true}
+    >
+
 			{({
 				handleBlur,
 				handleChange,
@@ -28,7 +38,7 @@ const AddPostForm = () => {
 				isValid,
 			}) => (
 				<>
-					<View>
+					<View style={{margin: 20, justifyContent: 'space-between', flexDirection: 'row'}}>
 						<Image
 							source={{
 								uri: validUrl.isUri(thumbnailUrl)
@@ -43,6 +53,8 @@ const AddPostForm = () => {
 								placeholder="Write a Caption"
 								placeholderTextColor="gray"
 								multiline={true}
+                onChangeText={handleChange('caption')}
+                onBlur={handleBlur('caption')}
 								// value={values.caption}
 							/>
 						</View>
@@ -54,6 +66,8 @@ const AddPostForm = () => {
 						style={{ color: 'white', fontSize: 18 }}
 						placeholder="Enter Image Url"
 						placeholderTextColor="gray"
+						onChangeText={handleChange('imageUrl')}
+						onBlur={handleBlur('imageUrl')}
 						// value={values.imageUrl}
 					/>
 					{errors.imageUrl && (
@@ -61,6 +75,8 @@ const AddPostForm = () => {
 							{errors.imageUrl}
 						</Text>
 					)}
+
+          <Button title='Share' disabled={!isValid} />
 				</>
 			)}
 		</Formik>
