@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
 import React from 'react'
+import LoginForm from '../components/login/LoginForm'
 
 const INSTAGRAM_LOGO = 'https://img.icons8.com/fluency/48/instagram-new.png'
 
@@ -10,6 +11,7 @@ const LoginScreen = () => {
         <Image source={{uri: INSTAGRAM_LOGO, height: 100, width: 100}} />
       </View>
       {/* Login Form */}
+      <LoginForm />
     </View>
   )
 }
