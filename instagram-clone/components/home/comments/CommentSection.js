@@ -33,14 +33,21 @@ const CommentSection = ({ post }) => {
 		<View style={{ marginTop: 8 }}>
 			<Modal
 				animationType="slide"
-				transparent={false}
+				transparent={true}
 				// presentationStyle="FormSheet"
 				visible={modalVisible}
 			>
-				<View style={{marginHorizontal: 20, marginTop: 80}}>
-					<View>
+				<View
+					style={{
+						// marginHorizontal: 20,
+						marginTop: 80,
+						backgroundColor: '#5A5A5A',
+						flex: 1
+					}}
+				>
+					<View style={{}}>
 						{/* view all comments header (on press hide modal) */}
-						<CommentHeader />
+						<CommentHeader modalVisible={modalVisible}/>
 						{/* comments */}
 						{/* add comment form */}
 					</View>
@@ -48,9 +55,7 @@ const CommentSection = ({ post }) => {
 			</Modal>
 
 			{/* on press make modal visable */}
-			<TouchableOpacity 
-      onPress={() => setModalVisible(true)}
-      >
+			<TouchableOpacity onPress={() => setModalVisible(true)}>
 				{!!comments.length && (
 					<Text style={{ color: 'gray', fontWeight: 600 }}>
 						View {comments.length > 1 ? 'all ' : ''}
@@ -60,13 +65,21 @@ const CommentSection = ({ post }) => {
 			</TouchableOpacity>
 		</View>
 	)
+	// london@gmail.com
 
-	const CommentHeader = () => (
-		<View>
-			<Text>Header jjj</Text>
-      <Text>Header jjj</Text>
-      
-
+	const CommentHeader = ({modalVisible}) => (
+		<View style={{marginTop: 10}}>
+			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+					<Image
+						source={{
+							uri: 'https://img.icons8.com/sf-black/128/horizontal-line.png',
+						}}
+						style={{ width: 80, height: 40 }}
+					/>
+				</TouchableOpacity>
+				<Text style={styles.headerText}>Comments</Text>
+			</View>
 		</View>
 	)
 
@@ -97,6 +110,17 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		marginTop: 22,
+	},
+	headerContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	headerText: {
+		color: 'white',
+		fontWeight: 700,
+		fontSize: 25,
+		marginTop: 10,
 	},
 })
 export default CommentSection
