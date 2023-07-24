@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { firebase, db } from '../../../firebase'
+import AllComments from './AllComments'
 
 const CommentSection = ({ post }) => {
 	const [comments, setComments] = useState([])
@@ -48,7 +49,8 @@ const CommentSection = ({ post }) => {
 					<View style={{}}>
 						{/* view all comments header (on press hide modal) */}
 						<CommentHeader modalVisible={modalVisible}/>
-						{/* comments */}
+						{/* all comments */}
+						<AllComments comments={comments}/>
 						{/* add comment form */}
 					</View>
 				</View>
