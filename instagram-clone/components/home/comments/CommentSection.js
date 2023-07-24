@@ -30,7 +30,7 @@ const CommentSection = ({ post }) => {
 			})
 	}, [])
 
-	const ViewComments = ({ comments }) => (
+	const ViewComments = ({ post, comments }) => (
 		<View style={{ marginTop: 8 }}>
 			<Modal
 				animationType="slide"
@@ -50,7 +50,7 @@ const CommentSection = ({ post }) => {
 						{/* view all comments header (on press hide modal) */}
 						<CommentHeader modalVisible={modalVisible}/>
 						{/* all comments */}
-						<AllComments comments={comments}/>
+						<AllComments post={post} comments={comments}/>
 						{/* add comment form */}
 					</View>
 				</View>
@@ -87,7 +87,7 @@ const CommentSection = ({ post }) => {
 
 	return (
 		<View>
-			<ViewComments comments={comments} />
+			<ViewComments post={post} comments={comments} />
 			<Comments comments={comments} />
 		</View>
 	)

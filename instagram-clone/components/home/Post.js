@@ -34,15 +34,41 @@ const postFooterIcons = [
 ]
 
 const Post = ({ post }) => {
-const [comments, setComments ] = useState([])
-const [modalVisible, setModalVisible] = useState(false);
-
-
+	const [comments, setComments ] = useState([])
+	const [modalVisible, setModalVisible] = useState(false);
+	
+	
 	useEffect(() => {
 		db.collection('posts').doc(post.id).collection('comments').onSnapshot((snapshot) => {
 			setComments(snapshot.docs.map((comment) => ({ id: comment.id, ...comment.data() })))
 		})
 	}, [])
+	
+	const handleLike = (post) => {
+		const currentLikeStatus = !post.likes_by_users.includes(
+			firebase.auth().currentUser.email
+		)
+
+
+	db.collection('posts')
+		.doc(post.id)
+		.update({
+			likes_by_users: currentLikeStatus
+				? firebase.firestore.FieldValue.arrayUnion(
+						firebase.auth().currentUser.email
+					)
+				: firebase.firestore.FieldValue.arrayRemove(
+						firebase.auth().currentUser.email
+					),
+		})
+		.then(() => {
+			console.log('Successfully updated !!!')
+		})
+		.catch((error) => {
+			console.error('Error updating document: ', error)
+		})
+}
+
 
 	return (
 		<View style={{ marginBottom: 30 }}>
@@ -50,17 +76,18 @@ const [modalVisible, setModalVisible] = useState(false);
 			<PostHeader post={post} />
 			<PostImage post={post} />
 			<View style={{ marginHorizontal: 2, marginTop: 10 }}>
-				<PostFooter post={post} />
+				<PostFooter post={post} handleLike={handleLike}/>
 				<Likes post={post} />
 				<Caption post={post} />
 
 				<CommentSection post={post}/>
-				{/* <ViewComments comments={comments} />
-        <Comments comments={comments}/> */}
+				
 			</View>
 		</View>
 	)
 }
+
+
 
 const PostHeader = ({ post }) => (
 	<View
@@ -89,15 +116,21 @@ const PostImage = ({ post }) => (
 	</View>
 )
 
-const PostFooter = ({ post }) => (
+const PostFooter = ({ post, handleLike }) => (
 	<View style={{ flexDirection: 'row' }}>
 		<View style={styles.leftFooterIconContainer}>
-			<TouchableOpacity>
-				<Image
-					style={styles.footerIcon}
-					source={{ uri: postFooterIcons[0].imageUrl }}
-				/>
-			</TouchableOpacity>
+		<TouchableOpacity onPress={() => handleLike(post)}>
+        <Image
+          style={styles.footerIcon}
+          source={{
+            uri: post.likes_by_users.includes(firebase.auth().currentUser.email)
+              ? postFooterIcons[0].likedImageUrl
+              : postFooterIcons[0].imageUrl,
+          }}
+          // source={{uri: postFooterIcons[0].imageUrl}}
+        />
+      </TouchableOpacity>
+
 			<TouchableOpacity>
 				<Image
 					style={styles.footerIcon}
@@ -144,43 +177,8 @@ const Caption = ({ post }) => (
 )
 
 
-const ViewComments = ({ comments }) => (
-	<View style={{ marginTop: 5 }}>
-		<Modal
-			animationType="slide"
-			transparent={false}
-			// presentationStyle="FormSheet"
-			visible={false}
-		>
-			{/* view all comments header (on press hide modal) */}
-			{/* comments */}
-			{/* add comment form */}
-		</Modal>
 
-		{/* on press make modal visable */}
-		<TouchableOpacity onPress={() => setModalVisible(true)}>
-			{!!comments.length && (
-				<Text style={{ color: 'gray', fontWeight: 600 }}>
-					View {comments.length > 1 ? 'all ' : ''}
-					{comments.length} {comments.length > 1 ? 'comments' : 'comment'}
-				</Text>
-			)}
-		</TouchableOpacity>
-	</View>
-)
 
-const Comments = ({comments}) => (
-  <View>
-    {comments.slice(0, 2).map((comment, index) => (
-      <View key={index} style={{ flexDirection: 'row', marginTop: 3}}>
-        <Text style={{ color: 'white'}}>
-          <Text style={{ fontWeight: 700}}>{comment.user}</Text>{' '}
-          {comment.comment}
-        </Text>
-      </View>
-    ))}
-  </View>
-)
 
 const styles = StyleSheet.create({
 	story: {
