@@ -9,7 +9,7 @@ import {
 import React, { useState, useEffect } from 'react'
 import { Divider } from 'react-native-elements'
 import { firebase, db } from '../../firebase'
-
+import Comments from './Comments'
 const postFooterIcons = [
 	{
 		name: 'Like',
@@ -49,8 +49,9 @@ const [comments, setComments ] = useState([])
 				<PostFooter post={post} />
 				<Likes post={post} />
 				<Caption post={post} />
-				<CommentSection comments={comments} />
-        <Comments comments={comments}/>
+				<Comments post={post}/>
+				{/* <CommentSection comments={comments} />
+        <Comments comments={comments}/> */}
 			</View>
 		</View>
 	)
@@ -123,8 +124,8 @@ const PostFooter = ({ post }) => (
 
 const Likes = ({ post }) => (
 	<View style={{ flexDirection: 'row', marginTop: 4 }}>
-		{/* <Text style={{color: 'white', fontWeight: 600}}>{post.likes.toLocaleString('en')} likes</Text> */}
-		<Text style={{ color: 'white', fontWeight: 600 }}>{post.likes} likes</Text>
+		<Text style={{color: 'white', fontWeight: 600}}>{post.likes_by_users.toLocaleString('en')} likes</Text>
+		{/* <Text style={{ color: 'white', fontWeight: 600 }}>{post.likes} likes</Text> */}
 	</View>
 )
 
@@ -137,30 +138,30 @@ const Caption = ({ post }) => (
 	</View>
 )
 
-const CommentSection = ({comments}) => (
-  <View style={{marginTop: 5}}>
-    {!!comments.length && (
-      <Text style={{ color: 'gray', fontWeight: 600 }}>
-        View {comments.length > 1 ? 'all ' : ''}
-        {comments.length}{' '}
-        {comments.length > 1 ? 'comments' : 'comment'}
-      </Text>
-    )}
-  </View>
-)
+// const CommentSection = ({comments}) => (
+//   <View style={{marginTop: 5}}>
+//     {!!comments.length && (
+//       <Text style={{ color: 'gray', fontWeight: 600 }}>
+//         View {comments.length > 1 ? 'all ' : ''}
+//         {comments.length}{' '}
+//         {comments.length > 1 ? 'comments' : 'comment'}
+//       </Text>
+//     )}
+//   </View>
+// )
 
-const Comments = ({comments}) => (
-  <View>
-    {comments.slice(0, 2).map((comment, index) => (
-      <View key={index} style={{ flexDirection: 'row', marginTop: 3}}>
-        <Text style={{ color: 'white'}}>
-          <Text style={{ fontWeight: 700}}>{comment.user}</Text>{' '}
-          {comment.comment}
-        </Text>
-      </View>
-    ))}
-  </View>
-)
+// const Comments = ({comments}) => (
+//   <View>
+//     {comments.slice(0, 2).map((comment, index) => (
+//       <View key={index} style={{ flexDirection: 'row', marginTop: 3}}>
+//         <Text style={{ color: 'white'}}>
+//           <Text style={{ fontWeight: 700}}>{comment.user}</Text>{' '}
+//           {comment.comment}
+//         </Text>
+//       </View>
+//     ))}
+//   </View>
+// )
 
 const styles = StyleSheet.create({
 	story: {
