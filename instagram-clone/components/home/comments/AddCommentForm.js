@@ -6,7 +6,7 @@ import { Formik } from 'formik'
 import { firebase, db } from '../../../firebase'
 
 const uploadCommentSchema = Yup.object().shape({
-	comment: Yup.string().max(2200, 'Comment has reached the character limit'),
+	comment: Yup.string().required().max(2200, 'Comment has reached the character limit'),
 })
 
 const AddCommentForm = ({ post }) => {
@@ -40,14 +40,32 @@ const AddCommentForm = ({ post }) => {
 		console.log(profilePic)
 	}, [])
 
+  const uploadCommentToFirebase = ( comment) => {
+		const unsubscribe = db
+			.collection('posts')
+      .doc(post.id)
+      .collection('comments')
+			.add({
+				user: username,
+				profile_picture: profilePic,
+				comment: comment,
+				owner_uid: firebase.auth().currentUser.uid,
+				owner_email: firebase.auth().currentUser.email,
+				createdAt: new Date(),
+				likes_by_users: [],
+			})
+			
+
+		return unsubscribe
+	}
 	return (
 		<Formik
 			initialValues={{ comment: '' }}
 			onSubmit={(values) => {
-				console.log(values)
-				console.log('Your Comment was submitted successfully 🎉')
+				// console.log(values)
+				// console.log('Your Comment was submitted successfully 🎉')
 
-				// uploadPostToFirebase(values.imageUrl, values.caption)
+				uploadCommentToFirebase(values.comment)
 			}}
 			validationSchema={uploadCommentSchema}
 			validateOnMount={true}
@@ -61,33 +79,27 @@ const AddCommentForm = ({ post }) => {
 				isValid,
 			}) => (
 				<>
-        <View style={styles.wrapper}>
-
-       
-					<View 
-          style={{ flexDirection: 'row'}}
-          >
-						
+					<View style={styles.wrapper}>
+						<View style={{ flexDirection: 'row' }}>
 							<Image source={{ uri: profilePic }} style={styles.story} />
-						
 
-				<View style={{flex: 1}}>
+							<View style={{ flex: 1 }}>
+								<TextInput
+									style={styles.inputField}
+									placeholder="Write a Comment"
+									placeholderTextColor="gray"
+									multiline={true}
+									onChangeText={handleChange('comment')}
+									onBlur={handleBlur('comment')}
+									value={values.comment}
+								/>
+                {/* error message for form validation */}
+							</View>
 
-							<TextInput
-								style={styles.inputField}
-								placeholder="Write a Comment"
-								placeholderTextColor="gray"
-								multiline={true}
-								onChangeText={handleChange('comment')}
-								onBlur={handleBlur('comment')}
-								value={values.comment}
-							/>
-        </View>
-                
-              
-						
+
+							<Button title="Post" disabled={!isValid} onPress={handleSubmit}/>
+						</View>
 					</View>
-          </View>
 				</>
 			)}
 		</Formik>
@@ -102,17 +114,17 @@ const styles = StyleSheet.create({
 		marginLeft: 6,
 		borderWidth: 1.7,
 		borderColor: '#ff8501',
-    marginRight: 10
+		marginRight: 10,
 	},
 	inputField: {
-		borderRadius: 4,
+		borderRadius: 15,
 		padding: 12,
 		marginBottom: 10,
 		borderWidth: 2.5,
 		color: 'white',
 		fontSize: 20,
 	},
-  wrapper: {
+	wrapper: {
 		position: 'absolute',
 		width: '100%',
 		bottom: 0,
