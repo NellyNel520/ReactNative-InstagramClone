@@ -3,6 +3,7 @@ import React from 'react'
 import { firebase, db } from '../../../firebase'
 import moment from 'moment/moment'
 import AddCommentForm from './AddCommentForm'
+import { ScrollView } from 'react-native-gesture-handler'
 
 const likeIcons = 
 	[{
@@ -40,7 +41,10 @@ const AllComments = ({ post, comments }) => {
 	}
 
 	return (
-		<View style={{ marginHorizontal: 7, marginTop: 25 }}>
+		<View style={{ marginHorizontal: 7, marginTop: 25, height: '85%'}}>
+		<ScrollView>
+
+		
 			{comments.map((comment, index) => (
 				<View key={index} style={{ marginBottom: 20 }}>
 					<View
@@ -96,8 +100,9 @@ const AllComments = ({ post, comments }) => {
 					</View>
 				</View>
 			))}
+			</ScrollView>
 
-			<AddCommentForm />
+			<AddCommentForm post={post}/>
 		</View>
 	)
 }
