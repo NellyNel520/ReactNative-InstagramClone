@@ -1,6 +1,8 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { firebase, db } from '../../../firebase'
+import moment from 'moment/moment'
+import AddCommentForm from './AddCommentForm'
 
 const likeIcons = 
 	[{
@@ -9,7 +11,7 @@ const likeIcons =
 	}]
 
 const AllComments = ({ post, comments }) => {
-
+	
 
 	const handleLike = (comment) => {
 		const currentLikeStatus = !comment.likes_by_users.includes(
@@ -66,6 +68,8 @@ const AllComments = ({ post, comments }) => {
 									</Text>
 									{/* instal timeago package to convert timestamp */}
 									<Text>15h</Text>
+									{/* not working as expected will revisit */}
+									{/* <Text>{moment(comment.createdAt).fromNow()}</Text> */}
 								</View>
 
 								<Text style={{ fontSize: 16, color: 'white', marginTop: 4 }}>
@@ -87,19 +91,13 @@ const AllComments = ({ post, comments }) => {
 
 						{/* handle like function */}
 						<View>
-							{/* <TouchableOpacity>
-								<Image
-									source={{
-										uri: 'https://img.icons8.com/ios/50/ffffff/like--v1.png',
-									}}
-									style={{ width: 20, height: 20 }}
-								/>
-							</TouchableOpacity> */}
 							<LikeButton comment={comment} handleLike={handleLike} />
 						</View>
 					</View>
 				</View>
 			))}
+
+			<AddCommentForm />
 		</View>
 	)
 }
