@@ -3,7 +3,6 @@ import {
 	Text,
 	Image,
 	StyleSheet,
-	Touchable,
 	TouchableOpacity,
 	Modal,
 	SafeAreaView,
@@ -38,7 +37,7 @@ const CommentSection = ({ post }) => {
 				// presentationStyle="FormSheet"
 				visible={modalVisible}
 			>
-				<View
+				<View 
 					style={{
 						// marginHorizontal: 20,
 						marginTop: 80,
@@ -51,7 +50,6 @@ const CommentSection = ({ post }) => {
 						<CommentHeader modalVisible={modalVisible}/>
 						{/* all comments */}
 						<AllComments post={post} comments={comments}/>
-						{/* add comment form */}
 					</View>
 				</View>
 			</Modal>
