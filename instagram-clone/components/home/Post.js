@@ -81,12 +81,14 @@ const Post = ({ post }) => {
 			style={{
 				flexDirection: 'row',
 				justifyContent: 'space-between',
-				margin: 5,
+				// margin: 5,
+				marginTop: 16,
+				marginBottom: 10,
 				alignItems: 'center',
 			}}
 		>
 			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-				<Image source={{ uri: post.profilePic }} style={styles.story} />
+				<Image source={{ uri: post.profile_picture }} style={styles.story} />
 				<Text style={{ color: 'white', marginLeft: 5, fontWeight: '700' }}>
 					{post.user}
 				</Text>

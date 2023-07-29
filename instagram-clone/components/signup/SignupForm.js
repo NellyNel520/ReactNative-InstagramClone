@@ -25,7 +25,7 @@ const signupFormSchema = Yup.object().shape({
 
 // gives every user a random profile image on sign up
 const getRandomProfilePicture = async () => {
-	const response = await fetch('https://randomuser.me/api')
+	const response = await fetch('https://randomuser.me/api/')
 	const data = await response.json()
 	return data.results[0].picture.large
 }
