@@ -72,7 +72,7 @@ const BottomTabs = ({ navigation }) => {
 	
 
 	const Icon = ({ icon }) => (
-		<TouchableOpacity onPress={() => (setActiveTab(icon.name), icon.nav ? navigation.push(icon.nav) : null)}>
+		<TouchableOpacity onPress={() => ( icon.nav ? navigation.push(icon.nav) : null, setActiveTab(icon.name))}>
 			<Image
 				source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
 				style={[

@@ -1,10 +1,13 @@
 import { View, Text, SafeAreaView, StyleSheet} from 'react-native'
 import React from 'react'
+import BottomTabs from '../components/home/BottomTabs'
+import Header from '../components/profile/Header'
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ color: 'white'}}>ProfileScreen</Text>
+      <Header />
+      <BottomTabs navigation={navigation} />
     </SafeAreaView>
   )
 }
