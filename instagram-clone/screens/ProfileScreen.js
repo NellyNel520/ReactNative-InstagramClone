@@ -4,6 +4,7 @@ import BottomTabs from '../components/home/BottomTabs'
 import Header from '../components/profile/Header'
 import SubHeader from '../components/profile/SubHeader'
 import Bio from '../components/profile/Bio'
+import Buttons from '../components/profile/Buttons'
 
 
 const ProfileScreen = ({navigation}) => {
@@ -12,6 +13,7 @@ const ProfileScreen = ({navigation}) => {
       <Header />
       <SubHeader />
       <Bio />
+      <Buttons />
       <BottomTabs navigation={navigation} />
     </SafeAreaView>
   )
