@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 30,
 		height: 30,
-		marginLeft: 14,
+		marginLeft: 19,
 		resizeMode: 'contain',
   },
   headerText: {

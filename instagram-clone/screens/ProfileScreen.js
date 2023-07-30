@@ -2,11 +2,13 @@ import { View, Text, SafeAreaView, StyleSheet} from 'react-native'
 import React from 'react'
 import BottomTabs from '../components/home/BottomTabs'
 import Header from '../components/profile/Header'
+import SubHeader from '../components/profile/SubHeader'
 
 const ProfileScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
+      <SubHeader />
       <BottomTabs navigation={navigation} />
     </SafeAreaView>
   )
