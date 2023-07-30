@@ -7,7 +7,7 @@ import { firebase, db } from '../../../firebase'
 
 const uploadCommentSchema = Yup.object().shape({
 	comment: Yup.string().required().max(2200, 'Comment has reached the character limit'),
-})
+}) 
  
 const AddCommentForm = ({ post }) => {
 	const [username, setUsername] = useState('')

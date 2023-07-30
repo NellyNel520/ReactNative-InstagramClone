@@ -4,6 +4,7 @@ import { firebase, db } from '../../firebase'
 
 const SubHeader = () => {
 	const [profilePic, setProfilePic] = useState('')
+	const [posts, setPosts] = useState([])
 
 	const getProfilePic = () => {
 		const user = firebase.auth().currentUser.email
@@ -25,9 +26,20 @@ const SubHeader = () => {
 		return unsubscribe
 	}
 
+	const getPostCount = () => {
+		const user = firebase.auth().currentUser.email
+		const docRef = db.collection('posts').where('owner_email', '==', user)
+		const unsubscribe = docRef.onSnapshot((snapshot) => {
+			setPosts(snapshot.docs.map((post) => ({ id: post.id, ...post.data() })))
+		})
+		return unsubscribe
+	}
+
 	useEffect(() => {
 		getProfilePic()
 		console.log(profilePic)
+		getPostCount()
+		console.log(posts)
 	}, [])
 
 	return (
@@ -51,7 +63,7 @@ const SubHeader = () => {
 			<View style={styles.countContainer}>
 				{/* post count */}
 				<TouchableOpacity style={styles.count}>
-					<Text style={styles.number}>14</Text>
+					<Text style={styles.number}>{posts.length}</Text>
 					<Text style={styles.countTitle}>Posts</Text>
 				</TouchableOpacity>
 				{/* Followers */}
