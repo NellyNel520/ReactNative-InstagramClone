@@ -1,22 +1,28 @@
-import { View, Text, SafeAreaView, StyleSheet} from 'react-native'
+import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
-import BottomTabs from '../components/home/BottomTabs'
+import BottomTabs from '../components/profile/BottomTabs'
 import Header from '../components/profile/Header'
 import SubHeader from '../components/profile/SubHeader'
 import Bio from '../components/profile/Bio'
 import Buttons from '../components/profile/Buttons'
 
+import PostGrid from '../components/profile/PostGrid'
+import { ScrollView } from 'react-native-gesture-handler'
 
-const ProfileScreen = ({navigation}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Header />
-      <SubHeader />
-      <Bio />
-      <Buttons />
-      <BottomTabs navigation={navigation} />
-    </SafeAreaView>
-  )
+const ProfileScreen = ({ navigation }) => {
+	return (
+		<SafeAreaView style={styles.container}>
+			<Header />
+			<ScrollView>
+				<SubHeader />
+				<Bio />
+				<Buttons />
+
+				<PostGrid />
+			</ScrollView>
+			<BottomTabs navigation={navigation} />
+		</SafeAreaView>
+	)
 }
 
 const styles = StyleSheet.create({
@@ -25,6 +31,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 })
-
 
 export default ProfileScreen
