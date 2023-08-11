@@ -13,15 +13,26 @@ const PostHeader = ({navigation, username}) => {
 			</TouchableOpacity>
 
       <View style={{alignItems: 'center', marginLeft: 160}}>
-        <Text style={{color: 'white'}}>{username}</Text>
-        <Text style={{color: 'white'}}>Posts</Text>
+        <Text style={styles.username}>{username.toUpperCase()}</Text>
+        <Text style={styles.headerText}>Posts</Text>
       </View>
     </View>
   )
 }
 
-const style = StyleSheet.create({
-
+const styles = StyleSheet.create({
+  username: {
+		color: 'gray',
+		fontWeight: 700,
+		fontSize: 15,
+		marginTop: 10,
+	},
+  headerText: {
+		color: 'white',
+		fontWeight: 700,
+		fontSize: 18,
+		// marginTop: 10,
+	},
 })
 
 export default PostHeader

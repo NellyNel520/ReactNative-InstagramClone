@@ -76,7 +76,7 @@ const PostGrid = ({navigation}) => {
 			{posts.map((post, index) => (
 				<TouchableOpacity key={index} onPress={() => {navigation.navigate('PostScreen', {
 					username: post.user,
-					postId: post.id
+					post: post
 				})}}>
 					<Image
 						style={{ width: 140, height: 140 }}

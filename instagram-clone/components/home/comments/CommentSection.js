@@ -40,7 +40,7 @@ const CommentSection = ({ post }) => {
 				<View 
 					style={{
 						// marginHorizontal: 20,
-						marginTop: 80,
+						marginTop: 200,
 						backgroundColor: '#5A5A5A',
 						flex: 1
 					}}
