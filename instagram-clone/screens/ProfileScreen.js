@@ -18,7 +18,7 @@ const ProfileScreen = ({ navigation }) => {
 				<Bio />
 				<Buttons />
 
-				<PostGrid />
+				<PostGrid navigation={navigation} />
 			</ScrollView>
 			<BottomTabs navigation={navigation} />
 		</SafeAreaView>

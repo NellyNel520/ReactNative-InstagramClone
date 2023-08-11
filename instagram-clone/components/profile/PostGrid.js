@@ -9,7 +9,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { firebase, db } from '../../firebase'
 
-const PostGrid = () => {
+const PostGrid = ({navigation}) => {
 	const [posts, setPosts] = useState([])
 
 	const getPost = () => {
@@ -64,7 +64,7 @@ const PostGrid = () => {
 		</View>
 	)
 
-	const Grid = () => (
+	const Grid = ({navigation}) => (
 		<View
 			style={{
 				flexDirection: 'row',
@@ -74,7 +74,10 @@ const PostGrid = () => {
 			}}
 		>
 			{posts.map((post, index) => (
-				<TouchableOpacity key={index}>
+				<TouchableOpacity key={index} onPress={() => {navigation.navigate('PostScreen', {
+					username: post.user,
+					postId: post.id
+				})}}>
 					<Image
 						style={{ width: 140, height: 140 }}
 						source={{ uri: post.imageUrl }}
@@ -92,7 +95,7 @@ const PostGrid = () => {
 			<TabIcons />
 			{/* post grid */}
 			<ScrollView>
-				<Grid />
+				<Grid navigation={navigation}/>
 			</ScrollView>
 		</View>
 	)
