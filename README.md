@@ -38,13 +38,30 @@ This Instagram clone app brings the magic of social connection to your mobile de
 6. Like Button Love: Show appreciation for posts and comments by tapping the like button, letting others know you enjoyed their content.
 ***
 ### ***Screenshots***
-##### Image Header 1
-![Image](https://i.postimg.cc/bNFWxKV5/memoji-laptop.png)
+##### Login & Register Screens
 ![Screenshot 2023-08-11 at 9 37 41 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/a4329a9e-53a1-4253-8ddc-cc26d2cd01e5)
+![Screenshot 2023-08-11 at 9 37 30 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/38d04354-43f9-4a38-b5fd-9502b1af0b9f)
 
 
-##### Image Header 2
-![Image](https://i.postimg.cc/4dLQCTck/memoji2.png)
+
+##### Home Screen
+![Screenshot 2023-08-11 at 9 40 03 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/ab691300-f56a-4192-866c-7ed7f64297d9)
+![Screenshot 2023-08-11 at 9 40 14 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/e0b112cd-990e-424a-9036-5a5d533fb29e)
+
+
+
+##### NewPost Screen
+![Screenshot 2023-08-11 at 9 40 36 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/50e2f2dc-51c2-4a5a-9c85-f26bbd5be99f)
+<img width="470" alt="Screenshot 2023-08-12 at 12 10 30 AM" src="https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/798e9f86-2db2-4ca8-ae13-a29c7931752f">
+
+
+##### Profile Screen
+![Screenshot 2023-08-11 at 9 40 52 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/9039a4e9-9f95-4ef1-8afe-49e772cabb7a)
+![Screenshot 2023-08-11 at 9 41 04 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/1798f4a1-a563-4278-ba33-6b0d1df5fb53)
+
+
+
+
 
 *** 
 ### ***Task List***
