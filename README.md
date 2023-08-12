@@ -40,6 +40,8 @@ This Instagram clone app brings the magic of social connection to your mobile de
 ### ***Screenshots***
 ##### Image Header 1
 ![Image](https://i.postimg.cc/bNFWxKV5/memoji-laptop.png)
+![Screenshot 2023-08-11 at 9 37 41 PM](https://github.com/NellyNel520/ReactNative-InstagramClone/assets/117863144/a4329a9e-53a1-4253-8ddc-cc26d2cd01e5)
+
 
 ##### Image Header 2
 ![Image](https://i.postimg.cc/4dLQCTck/memoji2.png)
