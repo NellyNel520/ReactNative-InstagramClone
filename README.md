@@ -64,10 +64,16 @@ This Instagram clone app brings the magic of social connection to your mobile de
 
 
 *** 
-### ***Task List***
-- [] Future update 1
-- [] Future update 2
-- [x] Completed Update
+### ***Future Updates***
+- [] User messaging 
+- [] In-app notifications 
+- [] edit profile screen to update name and user bio 
+- [] routing to any users profile when clicking username 
+- [] firebase image upload 
+- [] ability to follow users 
+- [] private vs public account options 
+- [] functional story components (24hr duration)
+- [x] liking posts and comments 
 - [x] ~~strikethrough~~ Items Also
 
 
