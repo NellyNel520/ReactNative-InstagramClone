@@ -6,7 +6,7 @@ import { firebase, db } from '../../firebase'
 
 
 const BottomTabs = ({ navigation }) => {
-	const [activeTab, setActiveTab] = useState('Home')
+	const [activeTab, setActiveTab] = useState('Search')
 	const [profilePic, setProfilePic] = useState('')
 
 	const getProfilePic = () => {

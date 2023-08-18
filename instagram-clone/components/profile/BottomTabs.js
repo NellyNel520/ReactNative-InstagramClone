@@ -48,6 +48,7 @@ const BottomTabs = ({ navigation }) => {
 			name: 'Search',
 			active: 'https://img.icons8.com/ios-filled/50/ffffff/search--v1.png',
 			inactive: 'https://img.icons8.com/ios/50/ffffff/search--v1.png',
+			nav: 'SearchScreen',
 		},
 		{
 			name: 'Add',
