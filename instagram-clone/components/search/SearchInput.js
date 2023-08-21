@@ -1,8 +1,12 @@
 import { View, Text, StyleSheet, Image, TextInput } from 'react-native'
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
+
+
 const SearchInput = () => {
+	
+
 	const SearchBar = () => (
 		<View>
 			<View style={styles.container}>
@@ -20,9 +24,10 @@ const SearchInput = () => {
 						style={styles.Input}
 						placeholder="Search"
 						placeholderTextColor="white"
-						// onChangeText={}
-						// value=''
+						// onChangeText={(e) => setUsername(e.target.value)}
+						// value={username}
 					/>
+					{/* {err && <span>User not found!</span>} */}
 
 					<TouchableOpacity>
 						<Image
@@ -40,24 +45,49 @@ const SearchInput = () => {
 		</View>
 	)
 	const SearchResults = () => (
-		<View style={{marginTop: 30,}}>
+		<View style={{ marginTop: 30 }}>
+			<View
+				style={{
+					flexDirection: 'row',
+					marginBottom: 10,
+				}}
+			>
+				<TouchableOpacity>
+					{/* user profile image */}
+					<Image
+						source={{
+							uri: 'https://images.unsplash.com/photo-1692299577327-728059ed5946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=800&q=60',
+						}}
+						style={styles.story}
+					/>
+				</TouchableOpacity>
+				<View style={{ marginLeft: 12, marginVertical: 15 }}>
+					{/* users username and name */}
+					<Text style={{ color: 'gray', fontSize: 20 }}>NellyNel01</Text>
+					<Text style={{ color: 'white', fontSize: 16 }}>Nelly Nel 🌸</Text>
+				</View>
+			</View>
+
 			<View
 				style={{
 					flexDirection: 'row',
 				}}
 			>
-        <TouchableOpacity>
-          {/* user profile image */}
-          <Image source={{}}
-            style={styles.story}
-          />
-        </TouchableOpacity>
-        <View style={{marginLeft: 12, marginVertical: 15}}>
-          {/* users username and name */}
-          <Text style={{color: 'gray', fontSize: 20}}>NellyNel01</Text>
-          <Text style={{color: 'white'}}>Nelly Nel 🌸</Text>
-        </View>
-      </View>
+				<TouchableOpacity>
+					{/* user profile image */}
+					<Image
+						source={{
+							uri: 'https://images.unsplash.com/photo-1692299577327-728059ed5946?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=800&q=60',
+						}}
+						style={styles.story}
+					/>
+				</TouchableOpacity>
+				<View style={{ marginLeft: 12, marginVertical: 15 }}>
+					{/* users username and name */}
+					<Text style={{ color: 'gray', fontSize: 20 }}>NellyNel01</Text>
+					<Text style={{ color: 'white', fontSize: 16 }}>Nelly Nel 🌸</Text>
+				</View>
+			</View>
 		</View>
 	)
 	return (
@@ -101,7 +131,7 @@ const styles = StyleSheet.create({
 		marginHorizontal: 5,
 		// justifyContent: 'space-around'
 	},
-  story: {
+	story: {
 		width: 75,
 		height: 75,
 		borderRadius: 50,
