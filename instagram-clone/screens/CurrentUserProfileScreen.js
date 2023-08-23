@@ -9,7 +9,7 @@ import Buttons from '../components/profile/Buttons'
 import PostGrid from '../components/profile/PostGrid'
 import { ScrollView } from 'react-native-gesture-handler'
 
-const ProfileScreen = ({ navigation }) => {
+const CurrentUserProfileScreen = ({ navigation }) => {
 	return (
 		<SafeAreaView style={styles.container}>
 			<Header />
@@ -32,4 +32,4 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default ProfileScreen
+export default CurrentUserProfileScreen

@@ -5,7 +5,7 @@ import HomeScreen from './screens/HomeScreen'
 import NewPostScreen from './screens/NewPostScreen'
 import LoginScreen from './screens/LoginScreen'
 import SignupScreen from './screens/SignupScreen'
-import ProfileScreen from './screens/ProfileScreen'
+import CurrentUserProfileScreen from './screens/CurrentUserProfileScreen'
 import PostScreen from './screens/PostScreen'
 import SearchScreen from './screens/SearchScreen'
 
@@ -23,7 +23,7 @@ export const SignedInStack = () => (
 		>
 			<Stack.Screen name="HomeScreen" component={HomeScreen} />
 			<Stack.Screen name="NewPostScreen" component={NewPostScreen} />
-			<Stack.Screen name="ProfileScreen" component={ProfileScreen} />
+			<Stack.Screen name="CurrentUserProfileScreen" component={CurrentUserProfileScreen} />
 			<Stack.Screen name="PostScreen" component={PostScreen} />
 			<Stack.Screen name="SearchScreen" component={SearchScreen} />
 		</Stack.Navigator>

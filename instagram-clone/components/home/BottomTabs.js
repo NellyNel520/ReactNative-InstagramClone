@@ -67,7 +67,7 @@ const BottomTabs = ({ navigation }) => {
 				profilePic,
 			inactive:
 				profilePic,
-			nav: 'ProfileScreen'
+			nav: 'CurrentUserProfileScreen'
 		},
 	]
 	
