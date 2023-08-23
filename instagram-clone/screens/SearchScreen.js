@@ -48,7 +48,9 @@ const SearchScreen = ({ navigation }) => {
         marginBottom: 10,
       }}
     >
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => {navigation.navigate('ProfileScreen', {
+				user: item
+			})}}>
         {/* user profile image */}
         <Image
           source={{
@@ -58,7 +60,7 @@ const SearchScreen = ({ navigation }) => {
         />
       </TouchableOpacity>
       {/* users username and name */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => {navigation.push('ProfileScreen')}}>
         <View style={{ marginLeft: 12, marginVertical: 15 }}>
           <Text style={{ color: 'gray', fontSize: 20 }}>{item.username}</Text>
           <Text style={{ color: 'white', fontSize: 16 }}>{item.name}</Text>
