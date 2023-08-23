@@ -41,6 +41,7 @@ const onSignup = async (email, password, username) => {
 			username: username,
 			email: authUser.user.email,
 			profile_picture: await getRandomProfilePicture(),
+			followers_by_users: [],
 		})
 	} catch (error) {
 		Alert.alert('Opps ...', error.message)

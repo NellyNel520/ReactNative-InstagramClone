@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
-
+ 
 const Buttons = () => {
   return (
     <View style={{marginTop: 40, flexDirection: 'row', marginHorizontal: 20}}>
