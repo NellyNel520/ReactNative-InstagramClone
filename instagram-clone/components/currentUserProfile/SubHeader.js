@@ -47,7 +47,7 @@ const SubHeader = () => {
 			<TouchableOpacity>
 				{/* User Profile Image */}
 				{
-					/* add blue badge with plus icon */
+					/* add blue badge with plus icon for "add to story" functionality */
 					<View style={styles.addBadge}>
 						<Image
 							style={styles.add}

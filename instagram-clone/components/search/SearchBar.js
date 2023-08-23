@@ -8,8 +8,15 @@ import {
 	Image,
 } from 'react-native'
 import React from 'react'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const SearchBar = ({ clicked, setClicked, searchFilterFunction, search }) => {
+const SearchBar = ({
+	clicked,
+	setClicked,
+	searchFilterFunction,
+	search,
+	setSearch,
+}) => {
 	return (
 		<View style={styles.container}>
 			<View
@@ -18,7 +25,6 @@ const SearchBar = ({ clicked, setClicked, searchFilterFunction, search }) => {
 						? styles.searchWrapper_clicked
 						: styles.searchWrapper_unclicked
 				}
-       
 			>
 				{/* search icon */}
 				<Image
@@ -34,31 +40,40 @@ const SearchBar = ({ clicked, setClicked, searchFilterFunction, search }) => {
 					placeholderTextColor="white"
 					style={styles.input}
 					value={search}
-				  onChangeText={(text) => searchFilterFunction(text)}
+					clearButtonMode="always"
+					onChangeText={(text) => searchFilterFunction(text)}
 					onFocus={() => {
-					  setClicked(true);
+						setClicked(true)
 					}}
 				/>
-				{/*cross Icon, depending on whether the search bar is clicked or not */}
-				{clicked && (
-					<Image
-						style={styles.deleteIcon}
-						source={{
-							uri: 'https://img.icons8.com/ios-filled/50/ffffff/delete-sign--v1.png',
-						}}
-					/>
-				)}
+				{/* ***Using ios built in clearButtonMode for now  for text input clearing functionality */}
+				
+				{/*cross Icon, depending on whether the search bar is clicked or not from scratch*/}
+				{/* {clicked && (
+					<TouchableOpacity onPress={() => setSearch('')}>
+						<Image
+							style={styles.deleteIcon}
+							source={{
+								uri: 'https://img.icons8.com/ios-filled/50/ffffff/delete-sign--v1.png',
+							}}
+							
+						/>
+					</TouchableOpacity>
+				)} */}
 			</View>
 
 			{/*cancel button, depending on whether the search bar is clicked or not */}
-      {clicked && (
-			<View>
-        <Button title='Cancel' onPress={() => {
-          Keyboard.dismiss();
-          setClicked(false);
-        }}></Button>
-      </View>
-      )}
+			{clicked && (
+				<View>
+					<Button
+						title="Cancel"
+						onPress={() => {
+							Keyboard.dismiss()
+							setClicked(false)
+						}}
+					></Button>
+				</View>
+			)}
 		</View>
 	)
 }
@@ -69,7 +84,6 @@ const styles = StyleSheet.create({
 		height: 23,
 	},
 	container: {
-		
 		justifyContent: 'flex-start',
 		alignItems: 'center',
 		flexDirection: 'row',
