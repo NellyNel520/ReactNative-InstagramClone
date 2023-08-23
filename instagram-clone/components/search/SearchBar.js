@@ -9,7 +9,7 @@ import {
 } from 'react-native'
 import React from 'react'
 
-const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setCLicked }) => {
+const SearchBar = ({ clicked, setClicked, searchFilterFunction, search }) => {
 	return (
 		<View style={styles.container}>
 			<View
@@ -33,30 +33,32 @@ const SearchBar = ({ clicked, searchPhrase, setSearchPhrase, setCLicked }) => {
 					placeholder="Search"
 					placeholderTextColor="white"
 					style={styles.input}
-					// value={searchPhrase}
-					// onChangeText={setSearchPhrase}
-					// onFocus={() => {
-					//   setClicked(true);
-					// }}
+					value={search}
+				  onChangeText={(text) => searchFilterFunction(text)}
+					onFocus={() => {
+					  setClicked(true);
+					}}
 				/>
 				{/*cross Icon, depending on whether the search bar is clicked or not */}
-				{/* {clicked && ( */}
+				{clicked && (
 					<Image
 						style={styles.deleteIcon}
 						source={{
 							uri: 'https://img.icons8.com/ios-filled/50/ffffff/delete-sign--v1.png',
 						}}
 					/>
-				{/* )} */}
+				)}
 			</View>
 
 			{/*cancel button, depending on whether the search bar is clicked or not */}
+      {clicked && (
 			<View>
         <Button title='Cancel' onPress={() => {
           Keyboard.dismiss();
-          setCLicked(false);
+          setClicked(false);
         }}></Button>
       </View>
+      )}
 		</View>
 	)
 }
@@ -72,11 +74,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		flexDirection: 'row',
 		width: '90%',
+		marginBottom: 15,
 	},
 	searchWrapper_unclicked: {
 		padding: 10,
 		flexDirection: 'row',
-		width: '95%',
+		width: '100%',
 		backgroundColor: '#5A5A5A',
 		borderRadius: 15,
 		alignItems: 'center',
