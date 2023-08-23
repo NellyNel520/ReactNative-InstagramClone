@@ -4,6 +4,9 @@ import BottomTabs from '../components/search/BottomTabs'
 import Header from '../components/profile/Header'
 import { ScrollView } from 'react-native-gesture-handler'
 import SubHeader from '../components/profile/SubHeader'
+import Bio from '../components/profile/Bio'
+import Buttons from '../components/profile/Buttons'
+
 
 
 const ProfileScreen = ({navigation, route}) => {
@@ -14,6 +17,8 @@ const ProfileScreen = ({navigation, route}) => {
       <Header userId={userId} navigation={navigation}/>
       <ScrollView>
         <SubHeader userId={userId}/>
+        <Bio userId={userId}/>
+        <Buttons />
       </ScrollView>
 
       <BottomTabs navigation={navigation}/>

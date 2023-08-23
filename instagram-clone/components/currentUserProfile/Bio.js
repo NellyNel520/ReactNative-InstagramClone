@@ -4,6 +4,7 @@ import { firebase, db } from '../../firebase'
 
 const Bio = () => {
 	const [name, setName] = useState('')
+	const [bio, setBio] = useState('')
 
 	const getName = () => {
 		// may need to change doc ref from uid to user email to be consistent
@@ -15,6 +16,8 @@ const Bio = () => {
 				if (doc.exists) {
 					// console.log('Document data:', doc.data())
 					setName(doc.data().name)
+					setBio(doc.data().bio)
+
 				} else {
 					console.log('No such document!')
 				}
@@ -39,9 +42,7 @@ const Bio = () => {
 			</Text>
 			{/* Bio / about section max character limit 150 copy from caption section in post upload to update/ add bio form field*/}
 			<Text style={{color: 'white', marginTop: 5, fontSize: 16, fontWeight: 500}}>
-				Live, Love, Laugh 🫶🏽🦋✨
-				{'\n'}
-			 📍NYC
+				{bio}
 			</Text>
 		</View>
 	)
