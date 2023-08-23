@@ -1,17 +1,23 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import {
+	View,
+	Text,
+	SafeAreaView, 
+	TouchableOpacity,
+	Image,
+	StyleSheet,
+} from 'react-native'
 import React from 'react'
-import PostHeader from '../components/profile/posts/PostHeader'
-import Post from '../components/profile/posts/Post';
-import BottomTabs from '../components/profile/BottomTabs';
+import PostHeader from '../components/currentUserProfile/PostHeader'
+import Post from '../components/currentUserProfile/Post'
+import BottomTabs from '../components/currentUserProfile/BottomTabs'
 
 const PostScreen = ({ navigation, route }) => {
-  const { username, post } = route.params;
+	const { username, post } = route.params
 	return (
 		<SafeAreaView style={styles.container}>
-			<PostHeader navigation={navigation} username={username}/>
-      <Post post={post}/>
-      <BottomTabs />
-      
+			<PostHeader navigation={navigation} username={username} />
+			<Post post={post} />
+			<BottomTabs />
 		</SafeAreaView>
 	)
 }

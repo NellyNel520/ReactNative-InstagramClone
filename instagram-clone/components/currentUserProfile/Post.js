@@ -8,10 +8,9 @@ import {
 	Modal,
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { firebase, db } from '../../../firebase'
-import AllComments from '../../home/comments/AllComments'
-import CommentSection from '../../home/comments/CommentSection'
-
+import { firebase, db } from '../../firebase'
+import AllComments from '../home/comments/AllComments'
+import CommentSection from '../home/comments/CommentSection'
 
 const postFooterIcons = [
 	{
@@ -22,7 +21,7 @@ const postFooterIcons = [
 	{
 		name: 'Comment',
 		imageUrl: 'https://img.icons8.com/ios/50/ffffff/speech-bubble--v1.png',
-	},
+	}, 
 	{
 		name: 'Share',
 		imageUrl: 'https://img.icons8.com/ios/50/ffffff/speech-bubble--v1.png',
@@ -34,13 +33,11 @@ const postFooterIcons = [
 	},
 ]
 
-
-
-const Post = ({post}) => {
-  const [comments, setComments] = useState([])
+const Post = ({ post }) => {
+	const [comments, setComments] = useState([])
 	const [modalVisible, setModalVisible] = useState(false)
 
-  useEffect(() => {
+	useEffect(() => {
 		db.collection('posts')
 			.doc(post.id)
 			.collection('comments')
@@ -54,7 +51,7 @@ const Post = ({post}) => {
 			})
 	}, [])
 
-  const handleLike = (post) => {
+	const handleLike = (post) => {
 		const currentLikeStatus = !post.likes_by_users.includes(
 			firebase.auth().currentUser.email
 		)
@@ -78,7 +75,7 @@ const Post = ({post}) => {
 			})
 	}
 
-  const PostHeader = ({ post }) => (
+	const PostHeader = ({ post }) => (
 		<View
 			style={{
 				flexDirection: 'row',
@@ -131,11 +128,13 @@ const Post = ({post}) => {
 					visible={modalVisible}
 					// visible={false}
 				>
-					<View style={{
-						marginTop: 80,
-						backgroundColor: '#5A5A5A',
-						flex: 1
-					}}>
+					<View
+						style={{
+							marginTop: 80,
+							backgroundColor: '#5A5A5A',
+							flex: 1,
+						}}
+					>
 						<View>
 							<CommentHeader modalVisible={modalVisible} />
 							<AllComments post={post} comments={comments} />
@@ -209,13 +208,11 @@ const Post = ({post}) => {
 		</View>
 	)
 
-
-  return (
-    <View>
-
-      <PostHeader post={post} />
+	return (
+		<View>
+			<PostHeader post={post} />
 			<PostImage post={post} />
-      <View style={{ marginHorizontal: 2, marginTop: 10 }}>
+			<View style={{ marginHorizontal: 2, marginTop: 10 }}>
 				{/* pass down modal visible useState to post footer */}
 				<PostFooter post={post} handleLike={handleLike} comments={comments} />
 				<Likes post={post} />
@@ -223,10 +220,9 @@ const Post = ({post}) => {
 
 				<CommentSection post={post} />
 			</View>
-    </View>
-  )
+		</View>
+	)
 }
-
 
 const styles = StyleSheet.create({
 	story: {

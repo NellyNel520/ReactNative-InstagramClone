@@ -1,16 +1,13 @@
-import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { firebase, db } from '../../firebase'
+import { db } from '../../firebase'
 
-
-const Header = () => {
-  const [username, setUsername] = useState('')
-
+const Header = ({ navigation, userId }) => {
+	const [username, setUsername] = useState('')
 
 	const getUsername = () => {
 		// may need to change doc ref from uid to user email to be consistent
-		const user = firebase.auth().currentUser.email
-		const docRef = db.collection('users').doc(user)
+		const docRef = db.collection('users').doc(userId)
 		const unsubscribe = docRef
 			.get()
 			.then((doc) => {
@@ -31,53 +28,53 @@ const Header = () => {
 		getUsername()
 		console.log(username)
 	}, [])
-  return (
-    <View style={styles.container}>
-      {/* username + down arrow */}
-      <TouchableOpacity style={{flexDirection: 'row', marginLeft: 3}}>
-        <Text style={styles.headerText}>{username}</Text>
-        <Image style={{ width: 15,
-		height: 15, marginTop: 10,marginLeft: 5, fontWeight: 700}} source={{uri: 'https://img.icons8.com/ios-filled/50/ffffff/expand-arrow--v1.png'}}/>
-      </TouchableOpacity>
 
-      {/* add & menu icon */}
-      <View style={styles.iconsContainer}>
-
-        <TouchableOpacity>
-          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/ios/50/ffffff/plus-2-math.png'}}/>
-        </TouchableOpacity>
-
-        <TouchableOpacity>
-          <Image style={styles.icon} source={{uri: 'https://img.icons8.com/ios-filled/50/ffffff/menu--v6.png'}} />
-        </TouchableOpacity>
-
-      </View>
-    </View>
-  )
+	return (
+		<View style={styles.container}>
+			{/* back arrow */}
+			<TouchableOpacity onPress={() => navigation.goBack()}>
+				<Image
+					source={{ uri: 'https://img.icons8.com/ios/90/ffffff/back--v1.png' }}
+					style={{ width: 30, height: 30 }}
+				/>
+			</TouchableOpacity>
+			{/* username */}
+			<Text style={styles.username}>{username}</Text>
+			{/* bell & 3 dots */}
+			<View style={{ flexDirection: 'row' }}>
+				<TouchableOpacity>
+					<Image
+						// source={{uri: 'https://img.icons8.com/carbon-copy/100/ffffff/bell--v1.png'}}
+						source={{
+							uri: 'https://img.icons8.com/material-outlined/24/ffffff/filled-appointment-reminders.png',
+						}}
+						style={{ width: 30, height: 30 }}
+					/>
+				</TouchableOpacity>
+				<TouchableOpacity>
+					<Image
+						source={{
+							uri: 'https://img.icons8.com/material-outlined/24/ffffff/more.png',
+						}}
+						style={{ width: 30, height: 30 }}
+					/>
+				</TouchableOpacity>
+			</View>
+		</View>
+	)
 }
 
 const styles = StyleSheet.create({
-  icon: {
-    width: 30,
-		height: 30,
-		marginLeft: 19,
-		resizeMode: 'contain',
-  },
-  headerText: {
-		color: 'white',
-		fontWeight: 700,
-		fontSize: 25,
-    textDecorationLine: 'underline',
-		// marginTop: 10,
-	},
-  iconsContainer: {
-		flexDirection: 'row',
-	},
-  container: {
+	container: {
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		flexDirection: 'row',
 		marginHorizontal: 20,
+	},
+	username: {
+		color: 'white',
+		fontWeight: 700,
+    fontSize: 20,
 	},
 })
 

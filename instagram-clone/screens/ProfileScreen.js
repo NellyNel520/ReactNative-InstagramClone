@@ -1,11 +1,21 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
 import BottomTabs from '../components/search/BottomTabs'
+import Header from '../components/profile/Header'
 
-const ProfileScreen = ({navigation}) => {
+
+const ProfileScreen = ({navigation, route}) => {
+  const { userId } = route.params
+
+  // firebase call to get username
+  
+
+
+ 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{color: 'white'}}>ProfileScreen</Text>
+      <Header userId={userId} navigation={navigation}/>
+
       <BottomTabs navigation={navigation}/>
     </SafeAreaView>
   )

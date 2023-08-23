@@ -1,12 +1,12 @@
 import { View, Text, SafeAreaView, StyleSheet } from 'react-native'
 import React from 'react'
-import BottomTabs from '../components/profile/BottomTabs'
-import Header from '../components/profile/Header'
-import SubHeader from '../components/profile/SubHeader'
-import Bio from '../components/profile/Bio'
-import Buttons from '../components/profile/Buttons'
+import BottomTabs from '../components/currentUserProfile/BottomTabs'
+import Header from '../components/currentUserProfile/Header'
+import SubHeader from '../components/currentUserProfile/SubHeader'
+import Bio from '../components/currentUserProfile/Bio'
+import Buttons from '../components/currentUserProfile/Buttons'
 
-import PostGrid from '../components/profile/PostGrid'
+import PostGrid from '../components/currentUserProfile/PostGrid'
 import { ScrollView } from 'react-native-gesture-handler'
 
 const CurrentUserProfileScreen = ({ navigation }) => {
