@@ -54,6 +54,7 @@ const ProfileScreen = ({ navigation, route }) => {
 					navigation={navigation}
 					user={user}
 					userId={userId}
+		
 				/>
 				<PostGrid userId={userId} navigation={navigation}/>
 

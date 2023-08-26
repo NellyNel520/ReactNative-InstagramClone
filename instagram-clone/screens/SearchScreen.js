@@ -25,10 +25,12 @@ const SearchScreen = ({ navigation }) => {
       // Filter the masterDataSource and update FilteredDataSource
       const newData = masterDataSource.filter(function (item) {
         // Applying filter for the inserted text in search bar
-        const itemData = item.username
-          ? item.username.toUpperCase()
+        const itemData = item.username && item.name
+          ? item.username.toUpperCase() && item.name.toUpperCase()
           : ''.toUpperCase();
         const textData = text.toUpperCase();
+
+	
         return itemData.indexOf(textData) > -1;
       });
       setFilteredDataSource(newData);
@@ -66,7 +68,9 @@ const SearchScreen = ({ navigation }) => {
         />
       </TouchableOpacity>
       {/* users username and name */}
-      <TouchableOpacity  onPress={() => viewProfile(item)}>
+      <TouchableOpacity  onPress={() => {navigation.navigate('ProfileScreen', {
+				userId: item.email
+			})}}>
         <View style={{ marginLeft: 12, marginVertical: 15 }}>
           <Text style={{ color: 'gray', fontSize: 20 }}>{item.username}</Text>
           <Text style={{ color: 'white', fontSize: 16 }}>{item.name}</Text>
