@@ -93,6 +93,7 @@ const PostGrid = ({ userId, navigation }) => {
 				))
 			) : (
 				<View style={styles.noPostContainer}>
+        
 					<View style={styles.cameraBorder}>
 						<Image
 							source={{
@@ -101,8 +102,9 @@ const PostGrid = ({ userId, navigation }) => {
 							style={styles.camera}
 						/>
 					</View>
-
-					<Text style={{ color: 'white' }}>No Posts Yet</Text>
+					<View>
+						<Text style={styles.noPostText}>No Posts Yet</Text>
+					</View>
 				</View>
 			)}
 		</View>
@@ -119,12 +121,12 @@ const PostGrid = ({ userId, navigation }) => {
 }
 
 const styles = StyleSheet.create({
-  noPostContainer: {
-    marginHorizontal: 160,
-    marginTop: 30
-
-
-  },
+	noPostContainer: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 22,
+	},
 	icon: {
 		width: 40,
 		height: 40,
@@ -133,6 +135,11 @@ const styles = StyleSheet.create({
 		width: 60,
 		height: 60,
 		margin: 18,
+    // borderWidth: 2,
+    // borderColor: 'white',
+		// borderRadius: 50,
+		// alignItems: 'center',
+		// justifyContent: 'center',
 	},
 	cameraBorder: {
 		borderWidth: 2,
@@ -140,6 +147,13 @@ const styles = StyleSheet.create({
 		borderRadius: 50,
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	noPostText: {
+		color: 'white',
+		fontWeight: 700,
+		fontSize: 25,
+		marginTop: 10,
+		// width: '100%',
 	},
 })
 

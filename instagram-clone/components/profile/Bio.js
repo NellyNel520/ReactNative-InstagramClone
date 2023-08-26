@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
 
 const Bio = ({ user }) => {
-
+const bio = user.bio
 
 
 	return (
@@ -10,7 +10,10 @@ const Bio = ({ user }) => {
 			{/* Name */}
       <Text style={styles.name}>{user.name}</Text>
 			{/* Bio */}
-      <Text style={styles.bio}>{user.bio}</Text>
+			{bio 
+			?  <Text style={styles.bio}>{user.bio}</Text>
+			: null
+			}
 
 		</View>
 	)
@@ -18,8 +21,8 @@ const Bio = ({ user }) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginVertical: 10, marginHorizontal: 10, minHeight: 80
-    
+    marginTop: 10, 
+		marginHorizontal: 10, 
   },
 	name: {
 		color: 'white',
