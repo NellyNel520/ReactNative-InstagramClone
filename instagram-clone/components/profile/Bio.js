@@ -1,41 +1,16 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { db } from '../../firebase'
+import React from 'react'
 
-const Bio = ({ userId }) => {
-	const [name, setName] = useState('')
-	const [bio, setBio] = useState('')
+const Bio = ({ user }) => {
 
-	const getUserInfo = () => {
-		// may need to change doc ref from uid to user email to be consistent
-		const docRef = db.collection('users').doc(userId)
-		const unsubscribe = docRef
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					// console.log('Document data:', doc.data())
-					setName(doc.data().name)
-					setBio(doc.data().bio)
-				} else {
-					console.log('No such document!')
-				}
-			})
-			.catch((error) => {
-				console.log('Error getting document:', error)
-			})
-		return unsubscribe
-	}
 
-	useEffect(() => {
-		getUserInfo()
-	}, [])
 
 	return (
 		<View style={styles.container}>
 			{/* Name */}
-      <Text style={styles.name}>{name}</Text>
+      <Text style={styles.name}>{user.name}</Text>
 			{/* Bio */}
-      <Text style={styles.bio}>{bio}</Text>
+      <Text style={styles.bio}>{user.bio}</Text>
 
 		</View>
 	)

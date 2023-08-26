@@ -2,32 +2,10 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 
-const Header = ({ navigation, userId }) => {
-	const [username, setUsername] = useState('')
+const Header = ({ navigation, user }) => {
+	
 
-	const getUsername = () => {
-		// may need to change doc ref from uid to user email to be consistent
-		const docRef = db.collection('users').doc(userId)
-		const unsubscribe = docRef
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					// console.log('Document data:', doc.data())
-					setUsername(doc.data().username)
-				} else {
-					console.log('No such document!')
-				}
-			})
-			.catch((error) => {
-				console.log('Error getting document:', error)
-			})
-		return unsubscribe
-	}
 
-	useEffect(() => {
-		getUsername()
-		console.log(username)
-	}, [])
 
 	return (
 		<View style={styles.container}>
@@ -39,7 +17,7 @@ const Header = ({ navigation, userId }) => {
 				/>
 			</TouchableOpacity>
 			{/* username */}
-			<Text style={styles.username}>{username}</Text>
+			<Text style={styles.username}>{user.username}</Text>
 			{/* bell & 3 dots */}
 			<View style={{ flexDirection: 'row' }}>
 				<TouchableOpacity>

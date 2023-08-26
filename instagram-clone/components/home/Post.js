@@ -49,7 +49,7 @@ const Post = ({ post }) => {
 						...comment.data(),
 					}))
 				)
-			})
+			}) 
 	}, [])
 
 	const handleLike = (post) => {
