@@ -72,7 +72,7 @@ const PostGrid = ({navigation}) => {
 				marginHorizontal: 0,
 				marginTop: 15,
 			}}
-		>
+		> 
 			{posts.map((post, index) => (
 				<TouchableOpacity key={index} onPress={() => {navigation.navigate('PostScreen', {
 					username: post.user,
@@ -91,7 +91,7 @@ const PostGrid = ({navigation}) => {
 	//  Tagged images Componet
 	return (
 		<View>
-			<Text>PostGrid</Text>
+		{/* will add tab navigation as icebox feature */}
 			<TabIcons />
 			{/* post grid */}
 			<ScrollView>

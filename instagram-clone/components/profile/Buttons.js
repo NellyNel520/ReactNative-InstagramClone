@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { db, firebase } from '../../firebase'
 
 const Buttons = ({ user, navigation, userId }) => {
-	// const followStatus = !user.followers_by_users.includes(firebase.auth().currentUser.email)
+// const [following, setFollowing] = useState()
+
 	const handleFollow = (user) => {
 		let currentFollowStatus = !user.followers_by_users.includes(
 			firebase.auth().currentUser.email
@@ -16,6 +17,7 @@ const Buttons = ({ user, navigation, userId }) => {
 					? firebase.firestore.FieldValue.arrayUnion(
 							firebase.auth().currentUser.email
 					  )
+						
 					: firebase.firestore.FieldValue.arrayRemove(
 							firebase.auth().currentUser.email
 					  ),
@@ -28,6 +30,18 @@ const Buttons = ({ user, navigation, userId }) => {
 				console.error('Error updating document: ', error)
 			})
 	}
+
+	const Follow = () => (
+		<TouchableOpacity style={styles.follow}>
+			<Text style={styles.buttonText}>Follow</Text>
+		</TouchableOpacity>
+	)
+
+	const UnFollow = ( ) => (
+		<TouchableOpacity style={styles.following}>
+			<Text style={styles.buttonText}>Following</Text>
+		</TouchableOpacity>
+	)
 
 	return (
 		<View style={styles.buttonContainer}>

@@ -13,15 +13,14 @@ import { Formik } from 'formik'
 import Validator from 'email-validator'
 import { firebase, db } from '../../firebase'
 
-
 const signupFormSchema = Yup.object().shape({
 	email: Yup.string().email().required('An email'),
 	username: Yup.string().required().min(2, 'A username is required'),
 	password: Yup.string()
 		.required()
 		.min(6, 'Your password has to have at least 8 characters '),
+	name: Yup.string().required(),
 })
-
 
 // gives every user a random profile image on sign up
 const getRandomProfilePicture = async () => {
@@ -30,35 +29,37 @@ const getRandomProfilePicture = async () => {
 	return data.results[0].picture.large
 }
 
-
-const onSignup = async (email, password, username) => {
+const onSignup = async (email, password, username, name) => {
 	try {
-		const authUser = await firebase.auth().createUserWithEmailAndPassword(email, password)
+		const authUser = await firebase
+			.auth()
+			.createUserWithEmailAndPassword(email, password)
 		console.log('🔥 Firebase Signup Successful ✅', email, password)
 
-		db.collection('users').doc(authUser.user.email).set({
-			owner_uid: authUser.user.uid,
-			username: username,
-			email: authUser.user.email,
-			profile_picture: await getRandomProfilePicture(),
-			followers_by_users: [],
-			bio: "",
-		})
+		db.collection('users')
+			.doc(authUser.user.email)
+			.set({
+				owner_uid: authUser.user.uid,
+				username: username,
+				email: authUser.user.email,
+				profile_picture: await getRandomProfilePicture(),
+				followers_by_users: [],
+				bio: '',
+				name: name,
+			})
 	} catch (error) {
 		Alert.alert('Opps ...', error.message)
 	}
 }
 
-
-
-const SignupForm = ({navigation}) => {
+const SignupForm = ({ navigation }) => {
 	return (
 		<View style={styles.wrapper}>
 			<Formik
-				initialValues={{ email: '', password: '', username: '' }}
+				initialValues={{ email: '', password: '', username: '', name: '' }}
 				onSubmit={(values) => {
-					onSignup(values.email, values.password, values.username)
-          // console.log(values.email, values.password, values.username)
+					onSignup(values.email, values.password, values.username, values.name)
+					// console.log(values.email, values.password, values.username)
 				}}
 				validationSchema={signupFormSchema}
 				validateOnMount={true}
@@ -72,8 +73,29 @@ const SignupForm = ({navigation}) => {
 					isValid,
 				}) => (
 					<>
+					<View
+							style={[
+								styles.inputField,
+								{
+									borderColor:
+										values.name.length || values.name.length > 2
+											? '#ccc'
+											: 'red',
+								},
+							]}
+						>
+							<TextInput
+								placeholderTextColor="#444"
+								placeholder="Name"
+								autoCapitalize="none"
+								textContentType="name"
+								onChangeText={handleChange('name')}
+								onBlur={handleBlur('name')}
+								value={values.name}
+							/>
+						</View>
 						<View
-            style={[
+							style={[
 								styles.inputField,
 								{
 									borderColor:
@@ -82,7 +104,7 @@ const SignupForm = ({navigation}) => {
 											: 'red',
 								},
 							]}
-            >
+						>
 							<TextInput
 								placeholderTextColor="#444"
 								placeholder="Email"
@@ -96,7 +118,8 @@ const SignupForm = ({navigation}) => {
 							/>
 						</View>
 
-						<View style={[
+						<View
+							style={[
 								styles.inputField,
 								{
 									borderColor:
@@ -104,7 +127,8 @@ const SignupForm = ({navigation}) => {
 											? '#ccc'
 											: 'red',
 								},
-							]}>
+							]}
+						>
 							<TextInput
 								placeholderTextColor="#444"
 								placeholder="Username"
@@ -116,7 +140,8 @@ const SignupForm = ({navigation}) => {
 							/>
 						</View>
 
-						<View style={[
+						<View
+							style={[
 								styles.inputField,
 								{
 									borderColor:
@@ -124,7 +149,8 @@ const SignupForm = ({navigation}) => {
 											? '#ccc'
 											: 'red',
 								},
-							]}>
+							]}
+						>
 							<TextInput
 								placeholderTextColor="#444"
 								placeholder="Password"
@@ -151,13 +177,12 @@ const SignupForm = ({navigation}) => {
 							<Text style={styles.buttonText}>Sign Up</Text>
 						</Pressable>
 
-            <View style={styles.signupContainer}>
-            <Text style={{color: 'white'}}>Already have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.push('LoginScreen')}>
-              <Text style={{ color: '#6BB0F5' }}>  Login</Text>
-            </TouchableOpacity>
-
-            </View>
+						<View style={styles.signupContainer}>
+							<Text style={{ color: 'white' }}>Already have an account?</Text>
+							<TouchableOpacity onPress={() => navigation.push('LoginScreen')}>
+								<Text style={{ color: '#6BB0F5' }}> Login</Text>
+							</TouchableOpacity>
+						</View>
 					</>
 				)}
 			</Formik>

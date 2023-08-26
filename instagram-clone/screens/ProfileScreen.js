@@ -14,6 +14,7 @@ import SubHeader from '../components/profile/SubHeader'
 import Bio from '../components/profile/Bio'
 import Buttons from '../components/profile/Buttons'
 import { db, firebase } from '../firebase'
+import PostGrid from '../components/profile/PostGrid'
 
 const ProfileScreen = ({ navigation, route }) => {
 	const { userId } = route.params
@@ -27,7 +28,7 @@ const ProfileScreen = ({ navigation, route }) => {
 				.get()
 				.then((doc) => {
 					if (doc.exists) {
-						// console.log('Document data:', doc.data())
+						console.log('Document data:', doc.data())
 						setUser(doc.data())
 					} else {
 						console.log('No such document!')
@@ -43,30 +44,6 @@ const ProfileScreen = ({ navigation, route }) => {
 
 	
 
-	// const handleFollow = (user) => {
-	// 	const currentFollowStatus = !user.followers_by_users.includes(
-	// 		firebase.auth().currentUser.email
-	// 	)
-
-	// 	db.collection('users')
-	// 		.doc(user.email)
-	// 		.update({
-	// 			followers_by_users: currentFollowStatus
-	// 				? firebase.firestore.FieldValue.arrayUnion(
-	// 						firebase.auth().currentUser.email
-	// 				  )
-	// 				: firebase.firestore.FieldValue.arrayRemove(
-	// 						firebase.auth().currentUser.email
-	// 				  ),
-	// 		})
-	// 		.then(() => {
-	// 			console.log('Successfully updated !!!')
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error('Error updating document: ', error)
-	// 		})
-	// }
-
 	return (
 		<SafeAreaView style={styles.container}>
 			<Header user={user} navigation={navigation} />
@@ -77,8 +54,9 @@ const ProfileScreen = ({ navigation, route }) => {
 					navigation={navigation}
 					user={user}
 					userId={userId}
-				
 				/>
+				<PostGrid userId={userId} navigation={navigation}/>
+
 			</ScrollView>
 
 			<BottomTabs navigation={navigation} />
