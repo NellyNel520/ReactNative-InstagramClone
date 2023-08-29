@@ -17,7 +17,7 @@ const CommentSection = ({ post }) => {
 
 	useEffect(() => {
 		db.collection('posts')
-			.doc(post.id)
+			.doc(post.id) 
 			.collection('comments')
 			.onSnapshot((snapshot) => {
 				setComments(
@@ -35,7 +35,7 @@ const CommentSection = ({ post }) => {
 				animationType="slide"
 				transparent={true}
 				// presentationStyle="FormSheet"
-				visible={modalVisible}
+				visible={modalVisible} 
 			>
 				<View 
 					style={{

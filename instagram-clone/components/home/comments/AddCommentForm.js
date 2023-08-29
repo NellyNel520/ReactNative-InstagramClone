@@ -33,7 +33,7 @@ const AddCommentForm = ({ post }) => {
 			})
 		return unsubscribe
 	}
-
+ 
 	useEffect(() => {
 		getUsername()
 		console.log(username)

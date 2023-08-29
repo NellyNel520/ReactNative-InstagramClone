@@ -34,9 +34,10 @@ const postFooterIcons = [
 	},
 ]
 
-const Post = ({ post }) => {
+const Post = ({ post, navigation }) => {
 	const [comments, setComments] = useState([])
 	const [modalVisible, setModalVisible] = useState(false)
+	const [likesModalVisible, setLikesModalVisible] = useState(false)
 
 	useEffect(() => {
 		db.collection('posts')
@@ -49,7 +50,7 @@ const Post = ({ post }) => {
 						...comment.data(),
 					}))
 				)
-			}) 
+			})
 	}, [])
 
 	const handleLike = (post) => {
@@ -87,12 +88,20 @@ const Post = ({ post }) => {
 				alignItems: 'center',
 			}}
 		>
-			<View style={{ flexDirection: 'row', alignItems: 'center' }}>
-				<Image source={{ uri: post.profile_picture }} style={styles.story} />
-				<Text style={{ color: 'white', marginLeft: 5, fontWeight: '700' }}>
-					{post.user}
-				</Text>
-			</View>
+			<TouchableOpacity
+				onPress={() => {
+					navigation.navigate('ProfileScreen', {
+						userId: post.owner_email,
+					})
+				}}
+			>
+				<View style={{ flexDirection: 'row', alignItems: 'center' }}>
+					<Image source={{ uri: post.profile_picture }} style={styles.story} />
+					<Text style={{ color: 'white', marginLeft: 5, fontWeight: '700' }}>
+						{post.user}
+					</Text>
+				</View>
+			</TouchableOpacity>
 		</View>
 	)
 
@@ -129,11 +138,13 @@ const Post = ({ post }) => {
 					visible={modalVisible}
 					// visible={false}
 				>
-					<View style={{
-						marginTop: 80,
-						backgroundColor: '#5A5A5A',
-						flex: 1
-					}}>
+					<View
+						style={{
+							marginTop: 80,
+							backgroundColor: '#5A5A5A',
+							flex: 1,
+						}}
+					>
 						<View>
 							<CommentHeader modalVisible={modalVisible} />
 							<AllComments post={post} comments={comments} />
@@ -191,10 +202,50 @@ const Post = ({ post }) => {
 
 	const Likes = ({ post }) => (
 		<View style={{ flexDirection: 'row', marginTop: 4 }}>
-			<Text style={{ color: 'white', fontWeight: 600 }}>
-				{post.likes_by_users.length.toLocaleString('en')} likes
-			</Text>
+			{/* likes modal pop up */}
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={likesModalVisible}
+			>
+				<View
+					style={{
+						// marginHorizontal: 20,
+						marginTop: 200,
+						backgroundColor: '#5A5A5A',
+						flex: 1,
+					}}
+				>
+					<View>
+						{/* likes header */}
+						<LikesHeader />
+						{/* likes list */}
+					</View>
+				</View>
+			</Modal>
+			{/* on press make modal visible */}
+			<TouchableOpacity onPress={() => setLikesModalVisible(true)}>
+				<Text style={{ color: 'white', fontWeight: 600 }}>
+					{post.likes_by_users.length.toLocaleString('en')} likes
+				</Text>
+			</TouchableOpacity>
 			{/* <Text style={{ color: 'white', fontWeight: 600 }}>{post.likes} likes</Text> */}
+		</View>
+	)
+
+	const LikesHeader = ({ modalVisible }) => (
+		<View style={{ marginTop: 10 }}>
+			<View style={{ justifyContent: 'center', alignItems: 'center' }}>
+				<TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+					<Image
+						source={{
+							uri: 'https://img.icons8.com/sf-black/128/horizontal-line.png',
+						}}
+						style={{ width: 80, height: 40 }}
+					/>
+				</TouchableOpacity>
+				<Text style={styles.headerText}>Likes</Text>
+			</View>
 		</View>
 	)
 

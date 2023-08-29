@@ -14,7 +14,7 @@ const HomeScreen = ({ navigation }) => {
 		db.collectionGroup('posts').onSnapshot((snapshot) => {
 			setPosts(snapshot.docs.map((post) => ({ id: post.id, ...post.data() })))
 		})
-	}, [])
+	}, []) 
 	return ( 
 		<SafeAreaView style={styles.container}>
 			<Header />
@@ -22,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
 
 			<ScrollView>
 				{posts.map((post, index) => (
-					<Post post={post} key={index} />
+					<Post post={post} key={index} navigation={navigation}/>
 				))}
 			</ScrollView>
 

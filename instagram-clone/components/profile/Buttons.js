@@ -3,24 +3,38 @@ import React, { useEffect, useState } from 'react'
 import { db, firebase } from '../../firebase'
 
 const Buttons = ({ user, navigation, userId }) => {
-	// const [following, setFollowing] = useState('')
+	const [followers, setFollowers] = useState([])
+	const [following, setFollowing] = useState(false)
 
-	const handleFollow = (user) => {
-		let currentFollowStatus = !user.followers_by_users.includes(
-			firebase.auth().currentUser.email
-		)
+	const currentUser = firebase.auth().currentUser.email
 
+	const getFollowers = async () => {
+		const docRef = db.collection('users').doc(userId).collection('followers')
+		const subscribe = await docRef.onSnapshot((snapshot) => {
+			setFollowers(
+				snapshot.docs.map(
+					(follower) => follower.id
+					// ...follower.data(),}
+				)
+			)
+		})
+
+		return subscribe
+	}
+
+
+	useEffect(() => {
+		getFollowers()
+	}, [])
+
+	// follow works !!!
+	const handleFollow = (userId) => {
 		db.collection('users')
-			.doc(user.email)
-			.update({
-				followers_by_users: currentFollowStatus
-					? firebase.firestore.FieldValue.arrayUnion(
-							firebase.auth().currentUser.email
-					  )
-					: firebase.firestore.FieldValue.arrayRemove(
-							firebase.auth().currentUser.email
-					  ),
-			})
+			.doc(userId)
+			.collection('followers')
+			.doc(firebase.auth().currentUser.email)
+			.set({})
+
 			.then(() => {
 				console.log('Successfully updated !!!')
 				navigation.navigate('ProfileScreen', { userId: userId })
@@ -30,14 +44,36 @@ const Buttons = ({ user, navigation, userId }) => {
 			})
 	}
 
-	const Follow = () => (
-		<TouchableOpacity style={styles.follow}>
+	const handleUnFollow = (userId) => {
+		db.collection('users')
+			.doc(userId)
+			.collection('followers')
+			.doc(firebase.auth().currentUser.email)
+			.delete()
+
+			.then(() => {
+				console.log('Successfully deleted follow !!!')
+				navigation.navigate('ProfileScreen', { userId: userId })
+			})
+			.catch((error) => {
+				console.error('Error deleting document: ', error)
+			})
+	}
+
+	const FollowButton = (userId) => (
+		<TouchableOpacity
+			style={styles.follow}
+			onPress={() => handleFollow(userId)}
+		>
 			<Text style={styles.buttonText}>Follow</Text>
 		</TouchableOpacity>
 	)
 
-	const UnFollow = () => (
-		<TouchableOpacity style={styles.following}>
+	const FollowingButton = () => (
+		<TouchableOpacity
+			style={styles.following}
+			onPress={() => handleUnFollow(userId)}
+		>
 			<Text style={styles.buttonText}>Following</Text>
 		</TouchableOpacity>
 	)
@@ -45,16 +81,9 @@ const Buttons = ({ user, navigation, userId }) => {
 	return (
 		<View style={styles.buttonContainer}>
 			{/* follow or following */}
-			<TouchableOpacity
-				onPress={() => handleFollow(user)}
-				style={
-					// followStatus
-					styles.following
-					// : styles.follow
-				}
-			>
-				<Text style={styles.buttonText}>Follow</Text>
-			</TouchableOpacity>
+
+			{followers.includes(currentUser) ? <FollowingButton /> : <FollowButton />}
+
 
 			{/* message */}
 			<TouchableOpacity style={styles.button}>

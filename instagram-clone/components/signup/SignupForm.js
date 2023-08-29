@@ -28,7 +28,7 @@ const getRandomProfilePicture = async () => {
 	const data = await response.json()
 	return data.results[0].picture.large
 }
-
+ 
 const onSignup = async (email, password, username, name) => {
 	try {
 		const authUser = await firebase

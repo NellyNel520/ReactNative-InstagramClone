@@ -56,7 +56,7 @@ const AllComments = ({ post, comments }) => {
 										<Image
 											source={{ uri: comment.profile_picture }}
 											style={styles.story}
-										/>
+										/> 
 									</TouchableOpacity>
 
 									<View style={{ marginLeft: 8 }}>

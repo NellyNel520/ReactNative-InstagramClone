@@ -19,6 +19,13 @@ import PostGrid from '../components/profile/PostGrid'
 const ProfileScreen = ({ navigation, route }) => {
 	const { userId } = route.params
 	const [user, setUser] = useState({})
+	const [followers, setFollowers] = useState([])
+	const [following, setFollowing] = useState(false)
+
+
+
+
+	
 
 	useEffect(() => {
 		const getUser = () => {
@@ -39,7 +46,26 @@ const ProfileScreen = ({ navigation, route }) => {
 				})
 			return unsubscribe
 		}
+		const getFollowers = () => {
+			const subscribe = db.collection('users')
+			.doc(user.email) 
+			.collection('followers')
+			.onSnapshot((snapshot) => {
+				setFollowers(
+					snapshot.docs.map((follower) => ({
+						id: follower.id
+					}))
+					
+				)
+			})
+			return subscribe
+		}
 		getUser()
+		getFollowers()
+		
+
+		
+		
 	}, [])
 
 	
@@ -54,6 +80,7 @@ const ProfileScreen = ({ navigation, route }) => {
 					navigation={navigation}
 					user={user}
 					userId={userId}
+		
 		
 				/>
 				<PostGrid userId={userId} navigation={navigation}/>

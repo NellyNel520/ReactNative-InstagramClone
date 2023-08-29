@@ -1,8 +1,8 @@
 import {
-	View,
+	View,  
 	Text,
 	TouchableOpacity,
-	Image,
+	Image, 
 	StyleSheet,
 	ScrollView,
 } from 'react-native'
@@ -19,7 +19,7 @@ const PostGrid = ({navigation}) => {
 			setPosts(snapshot.docs.map((post) => ({ id: post.id, ...post.data() })))
 		})
 		return unsubscribe
-	}
+	} 
 
 	useEffect(() => {
 		getPost()
